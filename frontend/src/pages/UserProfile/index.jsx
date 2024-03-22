@@ -37,7 +37,7 @@ function ProfilePage({userFromDB}) {
       </div>
         
       </div>
-      <section className="container py-5 mt-10">
+      <section className="container py-2 mt-10">
         <div className="flex flex-col lg:flex-row justify-center items-start gap-10" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginTop: 'auto'}}>
           <div className="w-full lg:w-1/4 bg-gray-300 rounded-lg p-8 text-center">
             <img src={userData.profilePicture} alt="avatar" className="rounded-full w-36 h-34 mx-auto mb-4" />
