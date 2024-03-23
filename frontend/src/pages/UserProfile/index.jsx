@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Button } from '@mui/material';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 
 function ProfilePage({userFromDB}) {
@@ -61,7 +62,7 @@ function ProfilePage({userFromDB}) {
         <div className=' ml-[46%] mt-[1%]'>
 
           <Button variant="contained" color="error" className=''>
-            Logout
+          <Link to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>Logout</Link>
           </Button> 
       </div>
         
