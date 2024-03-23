@@ -19,7 +19,7 @@ import Grouptimetable from "./pages/grouptimetable";
 import UnderManintainCall from "./components/underDevelopMSG";
 import TimetableUpload from "./pages/Upload/TimetableUP"
 import UsersUploads from "./pages/Upload/UsersUp"
-import StudentUploads from "./pages/Upload/StudentUp"
+import StudentUploads from "./pages/Upload/studentUP"
 
 export default function App() {
   const [isSidebar, setIsSidebar] = useState(false);
