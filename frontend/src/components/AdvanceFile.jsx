@@ -8,6 +8,7 @@ import MuiAlert from '@mui/material/Alert';
 import * as XLSX from 'xlsx';
 import BasicSelect from './DegreeSelection';
 import MultipleSelectCheckmarks from './DegreeSelection';
+import Groupselect from './GroupSelection';
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -24,28 +25,44 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function InputFileUpload() {
 
-  // const values =["BSc(Hons) Computer Science","BSc(Hons) Software Engineering","BSc(Hons) Artificial Intelligence and Data Science"];
+  // const group =["BSc(Hons) Computer Science","BSc(Hons) Software Engineering","BSc(Hons) Artificial Intelligence and Data Science"];
 
 
   const [file, setFile] = React.useState(null);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState('');
-  const [degree,setDegree] = React.useState('')
+  const [degree,setDegree] = React.useState('');
+  const [group,setGroup] = React.useState([]);
 
 
-
-  if (degree=="BSc(Hons) Computer Science") {
-    const group =["CS-A", "CS-B", "CS-C", "CS-D", "CS-E", "CS-F", "CS-G", "CS-H", "CS-I", "CS-J", "CS-K", "CS-L", "CS-M", "CS-N", "CS-O"]
-    }
-  if (degree=="BSc(Hons) Software Engineering") {
-    const group=[  "SE-A",  "SE-B",  "SE-C",  "SE-D",  "SE-E",  "SE-F",  "SE-G",  "SE-H",  "SE-I",  "SE-J",  "SE-K",  "SE-L",  "SE-M",  "SE-N",  "SE-O"]
-  }
-  if (degree=="BSc(Hons) Artificial Intelligence and Data Science") {
-    const group =[ "AI-A",  "AI-B",  "AI-C",  "AI-D",  "AI-E"]
-  }
 
   const handledegreePath = (value) =>{
-    setDegree(value)
+    setDegree(value);
+    console.log("jfvjehfvbfvdjnfvdjfnvd")
+    console.log(degree[0] === "BSc(Hons) Computer Science")
+
+    // Set the group based on the selected degree
+    if (degree[0] === "BSc(Hons) Computer Science") {
+      const array1=["CS-A", "CS-B", "CS-C", "CS-D", "CS-E", "CS-F", "CS-G", "CS-H", "CS-I", "CS-J", "CS-K", "CS-L", "CS-M", "CS-N", "CS-O"]
+      setGroup(array1);
+      console.log("fg")
+    }
+    if (degree[0] === "BSc(Hons) Software Engineering") {
+      setGroup(["SE-A", "SE-B", "SE-C", "SE-D", "SE-E", "SE-F", "SE-G", "SE-H", "SE-I", "SE-J", "SE-K", "SE-L", "SE-M", "SE-N", "SE-O"]);
+      console.log("fdd")
+    }
+    if (degree[0] === "BSc(Hons) Artificial Intelligence and Data Science") {
+      setGroup(["AI-A", "AI-B", "AI-C", "AI-D", "AI-E"]);
+      console.log("fggg")
+    }
+  }
+  console.log(group)
+
+
+  // console.log(degree)
+
+  const handleGroupPath = (value2) =>{
+    setGroup(value2)
 
   }
   console.log(degree)
@@ -129,6 +146,7 @@ export default function InputFileUpload() {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
       <MultipleSelectCheckmarks onDegreeChange={handledegreePath}/>
+      <Groupselect group={group} onDegreeChange={handleGroupPath} />
       
       <label htmlFor="file-upload">
         <Button
