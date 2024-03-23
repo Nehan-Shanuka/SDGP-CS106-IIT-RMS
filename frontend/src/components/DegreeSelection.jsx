@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,7 +13,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: "30%",
     },
   },
 };
@@ -24,29 +24,33 @@ const names = [
   'BSc(Hons) Artificial Intelligence and Data Science',
 ];
 
-export default function MultipleSelectCheckmarks() {
-  const [locationName, setLocationName] = useState([]);
+export default function MultipleSelectCheckmarks({onDegreeChange}) {
+  const [degreeName, setdegreeName] = useState([]);
+
+  useEffect(() => {
+    onDegreeChange(degreeName);
+  }, [degreeName, onDegreeChange]);
+  
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setLocationName(
+    setdegreeName(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
-  console.log(locationName);
+  console.log(degreeName);
 
   return (
     <div>
-      <FormControl sx={{ marginTop: 1, width: '100%' }}>
+      <FormControl sx={{ marginTop: 1, width: 300  }} className='bg-white'>
         <InputLabel id="demo-multiple-checkbox-label">Select Degree</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
-          multiple
-          value={locationName}
+          value={degreeName}
           onChange={handleChange}
           input={<OutlinedInput label="Select Degree" />}
           renderValue={(selected) => selected.join(', ')}
@@ -54,7 +58,7 @@ export default function MultipleSelectCheckmarks() {
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={locationName.indexOf(name) > -1} />
+              <Checkbox checked={degreeName.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}
