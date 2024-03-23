@@ -1,4 +1,4 @@
-import AdvanceFile from "../../components/AdvanceFile";
+import AdvanceStudent from "../../components/AdvanceStudent";
 import ParagraphWithReadMore from "../../components/Readinoptin";
 import img1 from"../../assets/timeexel.png";
 import img2 from"../../assets/upl.png"
@@ -19,7 +19,7 @@ export default function  StudentsUpload() {
           image={img1}
         />
         <div style={{ marginBottom: '20px' }}></div> 
-        <AdvanceFile />
+        <AdvanceStudent />
       </div>
     </div>
   );
