@@ -6,6 +6,9 @@ import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import * as XLSX from 'xlsx';
+import BasicSelect from './DegreeSelection';
+import MultipleSelectCheckmarks from './DegreeSelection';
+
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -21,9 +24,31 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function InputFileUpload() {
 
+  // const values =["BSc(Hons) Computer Science","BSc(Hons) Software Engineering","BSc(Hons) Artificial Intelligence and Data Science"];
+
+
   const [file, setFile] = React.useState(null);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState('');
+  const [degree,setDegree] = React.useState('')
+
+
+
+  if (degree=="BSc(Hons) Computer Science") {
+    const group =["CS-A", "CS-B", "CS-C", "CS-D", "CS-E", "CS-F", "CS-G", "CS-H", "CS-I", "CS-J", "CS-K", "CS-L", "CS-M", "CS-N", "CS-O"]
+    }
+  if (degree=="BSc(Hons) Software Engineering") {
+    const group=[  "SE-A",  "SE-B",  "SE-C",  "SE-D",  "SE-E",  "SE-F",  "SE-G",  "SE-H",  "SE-I",  "SE-J",  "SE-K",  "SE-L",  "SE-M",  "SE-N",  "SE-O"]
+  }
+  if (degree=="BSc(Hons) Artificial Intelligence and Data Science") {
+    const group =[ "AI-A",  "AI-B",  "AI-C",  "AI-D",  "AI-E"]
+  }
+
+  const handledegreePath = (value) =>{
+    setDegree(value)
+
+  }
+  console.log(degree)
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -56,8 +81,8 @@ export default function InputFileUpload() {
 
         // Restructure jsonData into the desired format
         const formattedData = {
-          groupName: "CS-E",
-          course: "BSc Computer Science",
+          groupName: {values},
+          course: {degree},
           sessions: []
         };
 
@@ -103,6 +128,8 @@ export default function InputFileUpload() {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      <MultipleSelectCheckmarks onDegreeChange={handledegreePath}/>
+      
       <label htmlFor="file-upload">
         <Button
           component="span"
