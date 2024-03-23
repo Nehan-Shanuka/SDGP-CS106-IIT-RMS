@@ -23,9 +23,9 @@ export default function UploadPage() {
   }
 }}>
   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
-  <MultiActionAreaCard type={"Timetable"} img={img1} path={"/student-upload"} texts={"This is a dedicated platform designed for students to effortlessly upload their timetables.It streamlines the process, saving time and ensuring all schedules are easily accessible. "} />
-    <MultiActionAreaCard type={"Studets"} img={img2} path={"/weekly-timetble"} texts={"Submit your student list here to generate groupings. It's a straightforward way to organize students efficiently without the hassle of manual grouping. Simplify your coordination process! "}/>
-    <MultiActionAreaCard type={"Users"} img={img3} path={"/weekly-timetble"}  texts={"Input your user list here to grant web access. It's a streamlined process to ensure users can easily access the website. Simplify user management and enhance accessibility "}/>
+  <MultiActionAreaCard type={"Timetables"} img={img1} path={"/Timetable-upload"} texts={"Welcome to our dedicated platform where you can effortlessly upload your timetables. Your schedules will be securely saved in our database, ensuring easy access whenever you need them. "} />
+    <MultiActionAreaCard type={"Students"} img={img2} path={"/Students-Details-upload"} texts={"Just click the link below to upload your student list and let us handle the rest! Our efficient solution organizes students into groups effortlessly, saving you time and hassle"}/>
+    <MultiActionAreaCard type={"Users"} img={img3} path={"/Users-Details-upload"}  texts={"Click the link below to submit your user list for web access. This streamlined approach simplifies user management, ensuring easy access to the website and enhancing accessibility."}/>
   </div>
 </Card>
     </div>
