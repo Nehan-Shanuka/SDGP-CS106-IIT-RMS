@@ -73,6 +73,9 @@ export default function App() {
     // setIsAuthenticated(true);
   };
 
+  const handleLogout = (user)  => {
+    setIsAuthenticated(false);}
+
   console.log("in app ", isAuthenticated);
   console.log("in app", onBoardUser);
 
@@ -113,7 +116,7 @@ export default function App() {
                 )}
                 <Route path="/group-timetable" element={<Grouptimetable />} />
                 <Route path="/weekly-timetble" element={<WeeklyTimetable user={userFromDB} />} />
-                <Route path="/my-profile" element={<Userprofile userFromDB={userFromDB} />} />
+                <Route path="/my-profile" element={<Userprofile userFromDB={userFromDB} onLogout={handleLogout} />} />
                 <Route path="/data-upload" element={<UploadsPage />} />
                 <Route path="/Timetable-upload" element={<TimetableUpload />} />
                 <Route path="/Users-Details-upload" element={<UsersUploads />} />

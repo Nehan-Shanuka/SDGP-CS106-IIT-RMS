@@ -4,11 +4,16 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 
-function ProfilePage({userFromDB}) {
+function ProfilePage({userFromDB,onLogout}) {
   const [usersData, setuserData] = useState([]);
   //  const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
-
+   const [error, setError] = useState(null); 
+   const [user, setUser] = useState(userFromDB);
+   
+  const handleLogout=()=>{setUser(null)}
+   useEffect(() => {
+   if (user===null) onLogout(user)} ,[user,onLogout]);
+    
 
   console.log("newuser:",userFromDB);
 
@@ -62,7 +67,7 @@ function ProfilePage({userFromDB}) {
         <div className=' ml-[46%] mt-[1%]'>
 
           <Button variant="contained" color="error" className=''>
-          <Link to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>Logout</Link>
+          <Link onChange={handleLogout} style={{ textDecoration: 'none', color: 'inherit' }}>Logout</Link>
           </Button> 
       </div>
         
