@@ -42,11 +42,17 @@ export default function InputFileUpload() {
     reader.onload = () => {
       try {
         const arrayBuffer = reader.result;
+        console.log('Array buffer:', arrayBuffer);
         const data = new Uint8Array(arrayBuffer);
+        console.log('Data:', data);
         const workbook = XLSX.read(data, { type: 'array' });
+        console.log('Workbook:', workbook);
         const sheetName = workbook.SheetNames[0];
+        console.log('Sheet name:', sheetName);
         const worksheet = workbook.Sheets[sheetName];
+        console.log('Worksheet:', worksheet);
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        console.log('JSON data:', jsonData);
 
         // Restructure jsonData into the desired format
         const formattedData = {
@@ -57,12 +63,12 @@ export default function InputFileUpload() {
 
         // Grouping sessions by day
         const groupedSessions = jsonData.reduce((acc, row) => {
-          const { Day, Time, BuildingID, HallID, Type, Subject, Lecturer } = row;
-          const sessionKey = `${Day}_${Time}`;
-          if (!acc[Day]) {
-            acc[Day] = {};
+          const { day, timeSession, buildingID, hallID, type, subject, lecturer } = row;
+          const sessionKey = timeSession;
+          if (!acc[day]) {
+            acc[day] = {};
           }
-          acc[Day][sessionKey] = { BuildingID, HallID, Type, Subject, Lecturer };
+          acc[day][sessionKey] = { buildingID, hallID, type, subject, lecturer };
           return acc;
         }, {});
 
