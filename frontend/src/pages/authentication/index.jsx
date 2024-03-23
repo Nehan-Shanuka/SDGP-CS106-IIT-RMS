@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { app } from "../../firebase";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import PROFILE_IMG from "../../assets/PROFILE_IMAGE.png";
-import GOOGLE from "../../assets/GOOGLE.png";
-import { TextField } from "@mui/material";
+import Lottie from 'lottie-react';
+import logo from "../../assets/IIT.png"
+import { motion } from 'framer-motion';
+import animation from "../../assets/ani2.json";
 
 export default function Authenticator({ userOnBoard }) {
   const [user, setUser] = useState();
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleAuthenticatorClick = async () => {
     try {
@@ -22,10 +24,11 @@ export default function Authenticator({ userOnBoard }) {
       if (domain === "iit.ac.lk" || domain === "gmail.com") {
         setUser(result.user);
       } else {
-        alert("Please use your IIT email to login!");
+        setErrorMessage("Please use your IIT email to login!");
       }
     } catch (error) {
       console.log(error);
+      setErrorMessage("Failed to sign in. Please try again later.");
     }
   };
 
@@ -37,100 +40,97 @@ export default function Authenticator({ userOnBoard }) {
 
   return (
     <>
-      <div className="bg-stone-200 w-full h-[50vh]"></div>
-      <div className="bg-[#3E737A] w-full h-[50vh]"></div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "80%",
-          height: "80vh",
-          backgroundColor: "#FFFFFF",
-          borderRadius: "20px",
-          display: "flex",
-          justifyContent: "center",
-          // opacity: "0.8",
-        }}
-      >
-        
-        <div className="bg-stone-200 m-auto my-20  px-20 w-fit rounded-[2rem]">
-          <img src={PROFILE_IMG} alt="profile" className="w-32 h-32 rounded-full mx-auto" style={{
-            display: "block",
-            margin: "auto",
-            // marginTop: "5%",
-            // borderRadius: "50%",
-            // boxShadow: "0px 0px px 0.5px rgba(0,0,0,0.75)",
-            // border: "5px solid #3E737A",
-            // border: "5px solid #3E737A",
-            transform: "translateY(-50%)",
-          }}/>
-          {/* <form className=""> */}
-            {/* <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-semibold">Email</label>
-              <input type="email" id="email" className="border-2 border-stone-500 rounded-md p-2 my-2" placeholder="email"/>
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="password" className="text-lg font-semibold">Password</label>
-              <input type="password" id="password" className="border-2 border-stone-500 rounded-md p-2 my-2" placeholder="password"/>
-            </div> */}
-            {/* </form> */}
-            <div className="flex flex-col rounded" 
-            style={{transform: "translateY(-20%)"}}>
-        <TextField
-          sx={{
-            // width: "100%",
-            borderRadius: 10,
-            marginBottom: 5,
-          }}
-          label="email"
-          color="success"
-          variant="filled"
-        />
-        <TextField
-          sx={{
-            // width: "100%",
-            borderRadius: 10,
-          }}
-          label="password"
-          color="success"
-          variant="filled"
-        />
-      </div>
-          <Button
-          color="secondary"
-          sx={{
-            // position: "absolute",
-            margin: "auto",
-            marginTop: "10%",
-            backgroundColor: "rgb(59, 7, 100)",
-            color: "rgb(255, 255, 255)",
-            padding: "10px 20px",
-            borderRadius: "10px",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            fontSize: "20px",
-            fontWeight: "bold",
-            textAlign: "center",
-            display: "block",
-            ":hover": {
-              backgroundColor: "rgb(59, 7, 100)",
-            },
-          }}
-          onClick={handleAuthenticatorClick}
+      <div className="w-full bg-stone-200"></div>
+      
+      <div className=''>
+        <motion.section
+          initial={{ y: 500 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className='bg-gray-300 pt-[370px] mt-[300px]'
         >
-          <div className="flex">
-            {/* <img src={GOOGLE} alt="google" className="w-8 h-8 rounded-full mx-auto"/> */}
-          {/* <div className="bg-purple-950 py-3 px-10 rounded-lg text-white"> */}
-          <h1>LOGIN WITH GOOGLE</h1>
-          {/* </div> */}
-          </div>
-          
-        </Button>
-        </div>
-        
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.8 }}
+            className=' mt-[-590px] relative '
+          >
+            <div className="flex w-[60%] max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-[#3e697a] lg:max-w-4xl">
+              <div className="hidden w-[40%] bg-cover lg:block mt-[15%] ml-10 ">
+                <Lottie animationData={animation} />
+              </div>
+              <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
+                <div className="flex justify-center mx-auto">
+                  <img className="w-[25%] h-[15%] " src={logo} alt="" />
+                </div>
+                <p className="mt-[2%] mb-[2%] text-xl text-center text-white m ">Welcome back!</p>
+                <Button
+            color="secondary"
+            sx={{
+              margin: "auto",
+              marginTop: "10%",
+              backgroundColor: "rgb(66, 133, 244)",
+              color: "rgb(255, 255, 255)",
+              padding: "10px 20px",
+              borderRadius: "10px",
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              fontSize: "20px",
+              fontWeight: "bold",
+              textAlign: "center",
+              display: "block",
+              ":hover": {
+                backgroundColor: "#ffffff",
+              },
+            }}
+            onClick={handleAuthenticatorClick}
+          >
+            <div className="flex font-medium">
+              <p>LOGIN WITH GOOGLE</p>
+            </div>
+          </Button>
+                
+                <div className="mt-4">
+                  <label
+                   className="block mb-2 text-sm font-medium text-white "
+                   htmlFor="LoggingEmailAddress"
+                  >
+                   Email Address
+                  </label>
+                  <input
+                   id="LoggingEmailAddress"
+                   className="block w-full px-4 py-2 text-white rounded-lg dark:text-black dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                   type="email"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="flex justify-between">
+                   <label
+                      className="block mb-2 text-sm font-medium text-white "
+                      htmlFor="loggingPassword"
+                   >
+                      Password
+                   </label>
+                   
+                  </div>
+                  <input
+                   id="loggingPassword"
+                   className="block w-full px-4 py-2 text-black bg-white border rounded-lg dark:text-gray-800 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                   type="password"
+                  />
+                </div>
+                <div className="pb-10 mt-6">
+                  <button onClick={handleAuthenticatorClick} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+                   Log In
+                  </button>
+                </div>
+                
+                
+              </div>
+            </div>
+          </motion.div>
+        </motion.section>
       </div>
     </>
   );
