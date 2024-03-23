@@ -17,7 +17,9 @@ import SorryCall from "./components/SorryCall";
 import axios from "axios";
 import Grouptimetable from "./pages/grouptimetable";
 import UnderManintainCall from "./components/underDevelopMSG";
-import StudentUpload from "./pages/Upload/studentUP"
+import TimetableUpload from "./pages/Upload/TimetableUP"
+import UsersUploads from "./pages/Upload/UsersUp"
+import StudentUploads from "./pages/Upload/StudentUp"
 
 export default function App() {
   const [isSidebar, setIsSidebar] = useState(false);
@@ -113,7 +115,9 @@ export default function App() {
                 <Route path="/weekly-timetble" element={<WeeklyTimetable user={userFromDB} />} />
                 <Route path="/my-profile" element={<Userprofile userFromDB={userFromDB} />} />
                 <Route path="/data-upload" element={<UploadsPage />} />
-                <Route path="/student-upload" element={<StudentUpload />} />
+                <Route path="/Timetable-upload" element={<TimetableUpload />} />
+                <Route path="/Users-Details-upload" element={<UsersUploads />} />
+                <Route path="/Students-Details-upload" element={<StudentUploads />} />
 
               </Routes>
             </main>
