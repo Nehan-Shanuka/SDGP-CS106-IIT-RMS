@@ -5,7 +5,7 @@ function Settings() {
   const [language, setLanguage] = useState('en'); 
   const [error, setError] = useState(null); 
 
-  
+  // Load theme and language preferences from local storage on component mount
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
     const storedLanguage = localStorage.getItem('language');
@@ -13,21 +13,24 @@ function Settings() {
     if (storedLanguage) setLanguage(storedLanguage);
   }, []);
 
-  
+  // Update local storage when theme or language changes
   useEffect(() => {
     localStorage.setItem('theme', theme);
     localStorage.setItem('language', language);
   }, [theme, language]);
 
+  // Handle theme change event
   const handleThemeChange = (event) => {
     setTheme(event.target.value);
   };
 
+  // Handle language change event
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
 
   
+  // Apply selected theme
   const handleThemeUpdate = () => {
     const rootElement = document.documentElement;
     switch (theme) {
@@ -42,6 +45,8 @@ function Settings() {
     }
   };
 
+
+  // Update theme when theme state changes
   useEffect(() => {
     handleThemeUpdate(); 
   }, [theme]); 
