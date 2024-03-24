@@ -10,6 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 
+// Constants for styling the Select component
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -21,6 +22,7 @@ const MenuProps = {
   },
 };
 
+// Sample data for location selection
 const names = [
   { shortForm: "SP", fullForm: "Spencer Building" },
   { shortForm: "GP", fullForm: "GP Square" },
@@ -29,9 +31,11 @@ const names = [
   { shortForm: "RB", fullForm: "Ramakrishna Building" },
 ];
 
+// Component for multiple selection with checkboxes
 export default function MultipleSelectCheckmarks({ onLocationChange }) {
   const [locationName, setLocationName] = useState([]);
 
+  // Function to handle change in selected locations
   const handleChange = (event) => {
     const {
       target: { value },
