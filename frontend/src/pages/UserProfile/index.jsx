@@ -4,16 +4,11 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 
 function ProfilePage({ userFromDB, onLogout }) {
-  const [user, setUser] = useState(userFromDB);
-
-
+  
   const handleLogout = () => {
     setUser(null);
     onLogout(user);
   };
-  useEffect(() => {
-    if (user === null) onLogout(user);
-  }, [user, onLogout]);
 
   // manage user data and errors
   const [usersData, setuserData] = useState([]);
