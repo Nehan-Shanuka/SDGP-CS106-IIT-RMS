@@ -1,11 +1,12 @@
-import { useState , useEffect} from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,18 +20,17 @@ const MenuProps = {
 };
 
 const names = [
-  'BSc(Hons) Computer Science',
-  'BSc(Hons) Software Engineering',
-  'BSc(Hons) Artificial Intelligence and Data Science',
+  "BSc(Hons) Computer Science",
+  "BSc(Hons) Software Engineering",
+  "BSc(Hons) Artificial Intelligence and Data Science",
 ];
 
-export default function MultipleSelectCheckmarks({onDegreeChange}) {
+export default function MultipleSelectCheckmarks({ onDegreeChange }) {
   const [degreeName, setdegreeName] = useState([]);
 
   useEffect(() => {
     onDegreeChange(degreeName);
   }, [degreeName, onDegreeChange]);
-  
 
   const handleChange = (event) => {
     const {
@@ -38,14 +38,14 @@ export default function MultipleSelectCheckmarks({onDegreeChange}) {
     } = event;
     setdegreeName(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === "string" ? value.split(",") : value
     );
   };
   console.log(degreeName);
 
   return (
     <div>
-      <FormControl sx={{ marginTop: 1, width: 300  }} className='bg-white'>
+      <FormControl sx={{ marginTop: 1, width: 300 }} className="bg-white">
         <InputLabel id="demo-multiple-checkbox-label">Select Degree</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -53,7 +53,7 @@ export default function MultipleSelectCheckmarks({onDegreeChange}) {
           value={degreeName}
           onChange={handleChange}
           input={<OutlinedInput label="Select Degree" />}
-          renderValue={(selected) => selected.join(', ')}
+          renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
