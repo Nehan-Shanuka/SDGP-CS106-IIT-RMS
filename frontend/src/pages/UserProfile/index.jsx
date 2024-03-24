@@ -1,90 +1,88 @@
-import React, { useState,useEffect } from 'react';
-import { Button } from '@mui/material';
-import axios from "axios";
-import { Link } from 'react-router-dom';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
 
+function ProfilePage({ userFromDB, onLogout }) {
+  const [user, setUser] = useState(userFromDB);
 
-// rendering user profile information and logout functionality
-function ProfilePage({userFromDB,onLogout}) {
-
-  // manage user data and errors
-  const [usersData, setuserData] = useState([]);
-  //const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null); 
-   const [user, setUser] = useState(userFromDB);
-   
-
-  // Function to handle user logout 
-  const handleLogout=()=>{setUser(null)}
-   useEffect(() => {
-   if (user===null) onLogout(user)} ,[user,onLogout]);
-    
-
-  console.log("newuser:",userFromDB);
-
-  // Sample user data
-  const userData = {
-    name: 'Lionel Messi',
-    indexNo: '101010',
-    level: '100',
-    course: 'Computer Science',
-    email: 'example@example.com',
-    phone: '(097) 234-5678',
-    mobile: '(098) 765-4321',
-    address: 'Bay Area, San Francisco, CA',
-    profilePicture: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp',
+  const handleLogout = () => {
+    setUser(null);
+    onLogout(user);
   };
+  useEffect(() => {
+    if (user === null) onLogout(user);
+  }, [user, onLogout]);
 
-  
+  const userData = {
+    name: "Lionel Messi",
+    indexNo: "101010",
+    level: "100",
+    course: "Computer Science",
+    email: "example@example.com",
+    phone: "(097) 234-5678",
+    mobile: "(098) 765-4321",
+    address: "Bay Area, San Francisco, CA",
+    profilePicture:
+      "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp",
+  };
 
   return (
     <div>
       <div className="flex justify-end mt-[-30px]">
-        
-      <div className="flex justify-end pr-5 pt-5 space-x-2">
-      {/* <Button variant="contained" color="info" style={{ marginRight: '8px' }}>
+        <div className="flex justify-end pr-5 pt-5 space-x-2">
+          {/* <Button variant="contained" color="info" style={{ marginRight: '8px' }}>
       Update Profile
       </Button> */}
-
-      </div>
-        
+        </div>
       </div>
       <section className="container py-2 mt-10">
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-10" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginTop: 'auto'}}>
+        <div
+          className="flex flex-col lg:flex-row justify-center items-start gap-10"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "auto",
+          }}
+        >
           <div className="w-full lg:w-1/4 bg-gray-300 rounded-lg p-8 text-center">
-            <img src={userData.profilePicture} alt="avatar" className="rounded-full w-36 h-34 mx-auto mb-4" />
-            { <p className="text-gray-600 mb-1">{userFromDB.name}</p> }
+            <img
+              src={userData.profilePicture}
+              alt="avatar"
+              className="rounded-full w-36 h-34 mx-auto mb-4"
+            />
+            {<p className="text-gray-600 mb-1">{userFromDB.name}</p>}
             <div className="flex justify-center gap-1">
               {/* <button className="bg-blue-500 text-white py-2 px-5 rounded">{userData.level}</button>
               <button className="bg-blue-500 text-white py-2 px-5 rounded">{userData.course}</button> */}
             </div>
           </div>
 
-
-      <div  className="w-full  lg:w-2/3 bg-gray-300 rounded-lg p-7" style={{ flexDirection: 'column', alignItems: 'center',marginTop: 'auto'}}>
-          <UserInfo label="Full Name : " value={userFromDB.name} />
-          <UserInfo label="Email : " value={userFromDB.email} />
-          <UserInfo label="Role : " value={userFromDB.role} />
-      </div>
-
-
+          <div
+            className="w-full  lg:w-2/3 bg-gray-300 rounded-lg p-7"
+            style={{
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "auto",
+            }}
+          >
+            <UserInfo label="Full Name : " value={userFromDB.name} />
+            <UserInfo label="Email : " value={userFromDB.email} />
+            <UserInfo label="Role : " value={userFromDB.role} />
+          </div>
         </div>
-        
-        <div className=' ml-[46%] mt-[1%]'>
 
-          <Button variant="contained" color="error" className=''>
-          <Link onChange={handleLogout} style={{ textDecoration: 'none', color: 'inherit' }}>Logout</Link>
-          </Button> 
-      </div>
-        
+        <div className=" ml-[46%] mt-[1%]">
+          <Button variant="contained" color="error" onClick={handleLogout}>
+            Logout
+          </Button>
+        </div>
       </section>
     </div>
-    
   );
 }
 
-
-// Component to display user information
 function UserInfo({ label, value }) {
   return (
     <div className="mb-4">

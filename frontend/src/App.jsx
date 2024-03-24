@@ -19,9 +19,9 @@ import SorryCall from "./components/SorryCall";
 import axios from "axios";
 import Grouptimetable from "./pages/grouptimetable";
 import UnderManintainCall from "./components/underDevelopMSG";
-import TimetableUpload from "./pages/Upload/TimetableUP"
-import UsersUploads from "./pages/Upload/UsersUp"
-import StudentUploads from "./pages/Upload/StudentUp"
+import TimetableUpload from "./pages/Upload/TimetableUP";
+import UsersUploads from "./pages/Upload/UsersUp";
+import StudentUploads from "./pages/Upload/studentUP";
 
 export default function App() {
 
@@ -42,7 +42,6 @@ export default function App() {
         const response = await axios.get("http://localhost:5555/users");
         if (response.status === 200) {
           setUsers(response.data);
-          // setOnBoardUser(response.data[0]);
         }
       } catch (error) {
         console.log(error);
@@ -50,7 +49,6 @@ export default function App() {
     };
     fetchUser();
   }, []);
-
 
   // Simulate loading delay
   useEffect(() => {
@@ -73,28 +71,30 @@ export default function App() {
 
   const handleUser = (user) => {
     setOnBoardUser(user);
+    // console.log("in app", user);
     users?.map((userFromDB) => {
       if (userFromDB.email === user.email) {
         setUserFromDB(userFromDB);
         setIsAuthenticated(true);
       }
     });
-    // setIsAuthenticated(true);
   };
 
-  const handleLogout = (user)  => {
-    setIsAuthenticated(false);}
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
 
-  console.log("in app ", isAuthenticated);
-  console.log("in app", onBoardUser);
+  // console.log("in app ", isAuthenticated);
+  // console.log("in app", onBoardUser);
 
   // Render different components based on state
   return (
     <>
-      {loading ? <SplashScreen /> : (
-      !isAuthenticated ? (
+      {loading ? (
+        <SplashScreen />
+      ) : !isAuthenticated ? (
         <Authenticator userOnBoard={handleUser} />
-      ) : (isWelcome ? (
+      ) : isWelcome ? (
         <Home onStateChange={handleStateChange} />
       ) : (
         !isWelcome && (
@@ -113,30 +113,52 @@ export default function App() {
                   path="/reservations"
                   element={<Reservation isSidebarOpen={isSidebar} />}
                 />
-                <Route path="/planned-sessions" element={<PlannedSessions isSidebarOpen={isSidebar} />} />
-                <Route path="/student-grouping" element={<UnderManintainCall />} />
+                <Route
+                  path="/planned-sessions"
+                  element={<PlannedSessions isSidebarOpen={isSidebar} />}
+                />
+                <Route
+                  path="/student-grouping"
+                  element={<UnderManintainCall />}
+                />
                 <Route path="/group-details" element={<UnderManintainCall />} />
                 {userFromDB.adminPrivilege ? (
                   <Route
-                  path="/review-requests"
-                  element={<ExpandableReviewReservation />}
-                />
+                    path="/review-requests"
+                    element={<ExpandableReviewReservation />}
+                  />
                 ) : (
                   <Route path="/review-requests" element={<SorryCall />} />
                 )}
                 <Route path="/group-timetable" element={<Grouptimetable />} />
-                <Route path="/weekly-timetble" element={<WeeklyTimetable user={userFromDB} />} />
-                <Route path="/my-profile" element={<Userprofile userFromDB={userFromDB} onLogout={handleLogout} />} />
+                <Route
+                  path="/weekly-timetble"
+                  element={<WeeklyTimetable user={userFromDB} />}
+                />
+                <Route
+                  path="/my-profile"
+                  element={
+                    <Userprofile
+                      userFromDB={userFromDB}
+                      onLogout={handleLogout}
+                    />
+                  }
+                />
                 <Route path="/data-upload" element={<UploadsPage />} />
                 <Route path="/Timetable-upload" element={<TimetableUpload />} />
-                <Route path="/Users-Details-upload" element={<UsersUploads />} />
-                <Route path="/Students-Details-upload" element={<StudentUploads />} />
-
+                <Route
+                  path="/Users-Details-upload"
+                  element={<UsersUploads />}
+                />
+                <Route
+                  path="/Students-Details-upload"
+                  element={<StudentUploads />}
+                />
               </Routes>
             </main>
           </div>
         )
-      )))}
+      )}
     </>
   );
 }

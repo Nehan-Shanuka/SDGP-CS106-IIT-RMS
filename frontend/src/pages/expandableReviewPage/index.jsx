@@ -92,7 +92,7 @@ export default function ExpandableReviewReservation() {
   return (
     <Card
       sx={{
-        paddingX: 10,
+        paddingX: {xs: "auto", md: 3},
         paddingTop: 1,
         paddingBottom: 3,
         height: "90vh",
@@ -114,7 +114,11 @@ export default function ExpandableReviewReservation() {
           },
         }}
       >
-        <div className="grid gap-3 grid-cols-2">
+        <div className="grid gap-3 xs:grid-cols-1 md:grid-cols-2" 
+        // style={{
+        //   gridColumn: {xs: "auto", md: "col-2"},
+        // }}
+        >
           {reservations.map((reservation, index) => {
             return (
               <Box

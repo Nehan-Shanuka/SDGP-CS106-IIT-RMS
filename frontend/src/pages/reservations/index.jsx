@@ -55,6 +55,7 @@ export default function Reservation({ isSidebarOpen }) {
         <Card
           sx={{
             display: "flex",
+            flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             paddingX: isSidebarOpen ? 10 : 15,
             paddingY: 3,
@@ -63,11 +64,21 @@ export default function Reservation({ isSidebarOpen }) {
             transitionDelay: "1s",
           }}
         >
-          <div>
-            <Calender onDateChange={handleDateChange} onDayChange={handleDayChange} />
-            <Location onLocationChange={handleLocationChange} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "",
+            }}
+          >
+            <div>
+              <Calender
+                onDateChange={handleDateChange}
+                onDayChange={handleDayChange}
+              />
+              <Location onLocationChange={handleLocationChange} />
+            </div>
           </div>
-
           <AvailableHallList
             color={"#723E7A"}
             isSidebarOpen={isSidebarOpen}

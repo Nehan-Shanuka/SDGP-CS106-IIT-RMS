@@ -72,8 +72,14 @@ const NestedGrid = ({ user }) => {
           width: "90%",
           borderRadius: "30px",
           backgroundColor: "lightgrey",
+          
+          overflowY: "auto",
+          scrollBehavior: "smooth",
+          height: { xs: "79.5vh", md: null },
+          "&::-webkit-scrollbar": {
+            display: "none"},
           "@media screen and (max-width: 768px)": {
-            marginLeft: "0",
+            margin: "auto",
             marginTop: "20px",
             width: "90%",
             padding: "20px",
