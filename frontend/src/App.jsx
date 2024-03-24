@@ -21,7 +21,7 @@ import Grouptimetable from "./pages/grouptimetable";
 import UnderManintainCall from "./components/underDevelopMSG";
 import TimetableUpload from "./pages/Upload/TimetableUP";
 import UsersUploads from "./pages/Upload/UsersUp";
-import StudentUploads from "./pages/Upload/studentUP";
+import StudentUploads from "./pages/Upload/StudentUp";
 
 export default function App() {
 
