@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import * as XLSX from 'xlsx';
+import axios from 'axios';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -61,31 +62,18 @@ export default function InputFileUpload() {
         
         const formattedData = formatData(jsonData);
 
-        fetch('http://localhost:5555/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formattedData)
-          
-        })
-        console.log(formattedData)
-
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to post data to the server');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Data posted successfully:', data);
-          setSnackbarMessage('File uploaded and data posted to server successfully.');
-          setOpenSnackbar(true);
-        })
-        .catch(error => {
-          console.error('Error posting data to server:', error);
-          setSnackbarMessage('Error posting data to server: ' + error.message);
-          setOpenSnackbar(true);
+        formattedData.forEach((entry) => {
+          axios.post('http://localhost:5555/users', entry)
+          .then(response => {
+            console.log('Data posted successfully:', response.data);
+            setSnackbarMessage('File uploaded and data posted to server successfully.');
+            setOpenSnackbar(true);
+          })
+          .catch(error => {
+            console.error('Error posting data to server:', error);
+            setSnackbarMessage('Error posting data to server: ' + error.message);
+            setOpenSnackbar(true);
+          });
         });
       } catch (error) {
         console.error('Error converting file to JSON:', error);
