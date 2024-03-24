@@ -4,12 +4,17 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 
+// rendering user profile information and logout functionality
 function ProfilePage({userFromDB,onLogout}) {
+
+  // manage user data and errors
   const [usersData, setuserData] = useState([]);
-  //  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null); 
    const [user, setUser] = useState(userFromDB);
    
+
+  // Function to handle user logout 
   const handleLogout=()=>{setUser(null)}
    useEffect(() => {
    if (user===null) onLogout(user)} ,[user,onLogout]);
@@ -17,6 +22,7 @@ function ProfilePage({userFromDB,onLogout}) {
 
   console.log("newuser:",userFromDB);
 
+  // Sample user data
   const userData = {
     name: 'Lionel Messi',
     indexNo: '101010',
@@ -77,6 +83,8 @@ function ProfilePage({userFromDB,onLogout}) {
   );
 }
 
+
+// Component to display user information
 function UserInfo({ label, value }) {
   return (
     <div className="mb-4">
