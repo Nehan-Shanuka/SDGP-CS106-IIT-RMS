@@ -15,9 +15,6 @@ function ProfilePage({ userFromDB, onLogout }) {
     if (user === null) onLogout(user);
   }, [user, onLogout]);
 
-// rendering user profile information and logout functionality
-function ProfilePage({userFromDB,onLogout}) {
-
   // manage user data and errors
   const [usersData, setuserData] = useState([]);
   //const [loading, setLoading] = useState(true);
