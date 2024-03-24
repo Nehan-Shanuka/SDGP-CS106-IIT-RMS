@@ -7,7 +7,7 @@ import Location from "../../components/LocationSelection";
 import AvailableHallList from "../../components/AvailableHallList";
 import axios from "axios";
 
-export default function Reservation({ isSidebarOpen }) {
+export default function Reservation({ isSidebarOpen, user }) {
   const [halls, setHalls] = useState([]);
   const [buildings, setBuildings] = useState([]);
   const [buildingID, setBuildingID] = useState([]);
@@ -43,6 +43,8 @@ export default function Reservation({ isSidebarOpen }) {
         console.log(error);
       });
   }, []);
+
+  console.log(user);
 
   // Function to handle location (building) change
   const handleLocationChange = (locationName) => {
@@ -91,6 +93,7 @@ export default function Reservation({ isSidebarOpen }) {
             buildings={buildings}
             dateSelected={selectedDate}
             day={day}
+            user={user}
           />
         </Card>
       </section>

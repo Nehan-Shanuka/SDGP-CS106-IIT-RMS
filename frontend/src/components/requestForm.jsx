@@ -36,6 +36,7 @@ export default function RequestForm({
   buildings,
   dateSelected,
   dayFromCalender,
+  user,
 }) {
   const [registationForm, setRegistationForm] = useState(false);
   const [checked, setChecked] = useState([false, false, false, false]);
@@ -182,7 +183,7 @@ export default function RequestForm({
           ? "13.30 - 15.30"
           : "15.30 - 17.30",
         subject: moduleName,
-        lecturer: "Mr. Sampath Perera",
+        lecturer: user.name,
         type: radioValue,
         confirmation: false,
         description: description,
