@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
 
+// Styled component for individual timetable item
 const Item = styled("div")(({ theme, color }) => ({
   backgroundColor: color,
   ...theme.typography.body2,
@@ -20,11 +21,13 @@ const Item = styled("div")(({ theme, color }) => ({
   margin: "10px",
 }));
 
+// Component for displaying the weekly timetable
 const WeeklyallTimetable = ({ selectedValue }) => {
   const [timetableData, setTimetableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch timetable data from the server on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,6 +45,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
     fetchData();
   }, []);
 
+  // Display loading message while fetching data
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -50,6 +54,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
     return <p>Error: {error}</p>;
   }
 
+  // Color options for timetable items
   const colors = ["#FF9999", "#99FF99", "#9999FF", "#FFFF99"];
 
   return (
@@ -57,7 +62,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
       <div className="grid justify-items-end">
 
       </div>
-
+      {/* Container for displaying the weekly timetable */}
       <Box
         sx={{
           flexGrow: 1,
@@ -85,6 +90,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
             "&::-webkit-scrollbar": { display: "none" },
           }}
         >
+          {/* Iterate over each weekday */}
           {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(
             (weekday, index) => (
               <Grid item xs={12} sm={6} md={4} lg={2.4} key={index}>
@@ -101,6 +107,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
                   >
                     {weekday}
                   </Typography>
+                  {/* Filter and map timetable data for the selected group and course */}
                   {timetableData
                     .filter(
                       (item) =>
@@ -112,10 +119,12 @@ const WeeklyallTimetable = ({ selectedValue }) => {
                     )
                     .map((item, itemIndex) => (
                       <div key={itemIndex}>
+                        {/* Map sessions for the current day */}
                         {item.sessions
                           .filter((session) => session.day === weekday)
                           .map((session, sessionIndex) => (
                             <div key={sessionIndex}>
+                              {/* Map time sessions for the current session */}
                               {session.timeSessions &&
                                 Object.keys(session.timeSessions).map(
                                   (timeKey, colorIndex) => (
@@ -125,6 +134,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
                                         session.timeSessions[timeKey]?.lecturer
                                       }
                                     >
+                                      {/* Render individual timetable item */}
                                       <Item
                                         color={
                                           session.timeSessions[timeKey] === null
@@ -168,7 +178,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
                                           </div>
                                         </div>
                                         <div className="text-base my-2">
-                                          {/* Apply font size  "Topic" */}
+                                         {/* Apply font size for the subject */}
                                           {session.timeSessions[timeKey]
                                             ?.subject ===
                                           "Object Oriented Programming"
