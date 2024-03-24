@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import styled from "@mui/material/styles/styled";
 import { Button } from "@mui/material";
 
+// Styled component for Paper with custom color
 const Item = styled(Paper)(({ color }) => ({
   backgroundColor: color,
   color: "#fff",
@@ -17,6 +18,7 @@ const Item = styled(Paper)(({ color }) => ({
   borderRadius: 15,
 }));
 
+// ReservationHallList component for displaying a list of reservations
 export default function ReservationHallList({
   color,
   isSidebarOpen,
@@ -24,8 +26,10 @@ export default function ReservationHallList({
   newhalls,
   newbuildings,
 }) {
+  // State for managing the hovered item
   const [hoveredItem, setHoveredItem] = useState(null);
 
+  // Destructuring props
   const reservations = newcourses;
   const halls = newhalls;
   const buildings = newbuildings;
@@ -57,6 +61,7 @@ export default function ReservationHallList({
             },
           }}
         >
+          {/* Mapping through reservations to render reservation items */}
           {reservations.map((reservation, index) => (
             (reservation.confirmation === true) ? (
             <Item
@@ -77,6 +82,7 @@ export default function ReservationHallList({
               onMouseLeave={() => setHoveredItem(null)}
               color={color}
             >
+              {/* Reservation content */}
               <div
                 className="flex justify-between items-center"
                 style={{
@@ -85,6 +91,7 @@ export default function ReservationHallList({
                   height: hoveredItem === index ? "auto" : "auto",
                 }}
               >
+                {/* Hall information */}
                 <div className="flex">
                   <div className="w-28 item-center">
                     <p className="pl-5 text-5xl">
@@ -96,6 +103,7 @@ export default function ReservationHallList({
                     </p>
                   </div>
 
+                  {/* Additional reservation details */}
                   <div className="relative ml-10">
                     <div>
                       <p className="text-xl my-2 mx-0">{reservation.subject}</p>
@@ -103,7 +111,8 @@ export default function ReservationHallList({
                     </div>
                   </div>
                 </div>
-
+                
+                {/* Building information */}
                 <div className="flex justify-center items-center w-36">
                   <div className="flex justify-center w-20 h-20 rounded-full bg-[#D9D9D9] text-black">
                     <p className="flex justify-center items-center text-4xl">
@@ -120,7 +129,8 @@ export default function ReservationHallList({
                   </div>
                 </div>
               </div>
-
+              
+              {/* Additional reservation details (expanded on hover) */}
               <div
                 style={{
                   display: "flex",
@@ -142,6 +152,7 @@ export default function ReservationHallList({
                       transition: "height 0.5s ease-in-out",
                     }}
                   >
+                    {/* Additional reservation details */}
                     <p className="m-1">Conducted By: {reservation.lecturer}</p>
                     <p className="m-1">Course: {reservation.course}</p>
                     <p className="m-1">
@@ -149,6 +160,7 @@ export default function ReservationHallList({
                     </p>
                   </div>
                 </div>
+                {/* Button to display reservation type */}
                 <Button
                   className="w-36"
                   style={{

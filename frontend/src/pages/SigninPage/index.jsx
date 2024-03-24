@@ -7,8 +7,9 @@ import logo from "../../assets/IIT_LOGO.png";
 const SigninForme = () => {
  const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
+ // Function to handle response callback
  function handleCallbackResponse(response) {
-    // Your existing logic here
+    
  }
 
  useEffect(() => {
@@ -28,11 +29,13 @@ const SigninForme = () => {
     google.accounts.id.renderButton(document.getElementById('dignInDiv'), buttonOptions);
  }, []);
 
+ // Function to validate email domain
  const validateEmailDomain = (email) => {
     const domain = email.split('@')[1]; // Get the domain part of the email
     return domain === 'iit.ac.lk';
  };
 
+ // Function to handle sign in button click
  const handleSignIn = () => {
     const email = document.getElementById('LoggingEmailAddress').value;
     if (validateEmailDomain(email)) {
@@ -43,6 +46,7 @@ const SigninForme = () => {
     }
  };
 
+ // JSX to render sign-in form
  return (
     <div className=''>
       <motion.section
