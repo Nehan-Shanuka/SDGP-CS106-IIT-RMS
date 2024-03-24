@@ -9,7 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import SimpleTypewriter from "./SimpleTypewriting"
 
-
+// Styled component for visually hidden input
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -24,18 +24,21 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 export default function InputFileUpload() {
-  const [file, setFile] = useState(null);
-  const [uploadMessage, setUploadMessage] = useState(null);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [file, setFile] = useState(null); // storing the selected file
+  const [uploadMessage, setUploadMessage] = useState(null); // storing upload status message
+  const [openSnackbar, setOpenSnackbar] = useState(false); // controlling Snackbar visibility
 
   const handleFileChange = (event) => {
+    // handling file selection and update the state
     setFile(event.target.files[0]);
     setUploadMessage(null);
   };
 
   const handleFileUpload = async (dataType) => {
+    // handling the file upload process
     try {
       if (!file) {
+        // Check if a file is selected
         setUploadMessage("No file selected");
         setOpenSnackbar(true);
         return;
@@ -43,6 +46,7 @@ export default function InputFileUpload() {
 
       const reader = new FileReader();
       reader.onload = async (event) => {
+        // FileReader onload event for processing the file content
         try {
           const fileContent = event.target.result;
           const parsedData = JSON.parse(fileContent);
@@ -74,7 +78,9 @@ export default function InputFileUpload() {
           setUploadMessage("File uploaded successfully");
           setOpenSnackbar(true);
           console.log("File uploaded successfully", response.data);
+
         } catch (error) {
+          // Catch errors related to JSON parsing or uploading
           setUploadMessage("Error uploading file");
           setOpenSnackbar(true);
           console.error("Error parsing JSON or uploading file", error);
@@ -83,6 +89,7 @@ export default function InputFileUpload() {
 
       reader.readAsText(file);
     } catch (error) {
+      // Catch any other errors in the file upload process
       setUploadMessage("Error uploading file");
       setOpenSnackbar(true);
       console.error("Error uploading file", error);
@@ -90,6 +97,7 @@ export default function InputFileUpload() {
   };
 
   const handleCloseSnackbar = (event, reason) => {
+    // Function to handle closing the Snackbar
     if (reason === 'clickaway') {
       return;
     }
