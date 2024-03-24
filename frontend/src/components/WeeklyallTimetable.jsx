@@ -72,8 +72,13 @@ const WeeklyallTimetable = ({ selectedValue }) => {
           width: "90%",
           borderRadius: "30px",
           backgroundColor: "#D9D9D9",
+          overflowY: "auto",
+          scrollBehavior: "smooth",
+          height: { xs: "77.5vh", md: null },
+          "&::-webkit-scrollbar": {
+            display: "none"},
           "@media screen and (max-width: 768px)": {
-            marginLeft: "0",
+            margin: "auto",
             marginTop: "20px",
             width: "90%",
             padding: "20px",

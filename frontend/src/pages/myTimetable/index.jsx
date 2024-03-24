@@ -251,7 +251,7 @@ export default function MyTimetable() {
               borderRadius: 5,
               padding: 2,
               justifyContent: "space-between",
-              width: "23rem",
+              width: { xs: "100%", md: "23rem" },
             }}
           >
             <div className="flex justify-between items-center">
@@ -302,7 +302,8 @@ export default function MyTimetable() {
               borderRadius: 5,
               padding: 2,
               justifyContent: "space-between",
-              width: "23rem",
+              width: { xs: "100%", md: "23rem" },
+
             }}
           >
             <div className="flex justify-between items-center">
@@ -360,32 +361,54 @@ export default function MyTimetable() {
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", md: "row" },
           justifyContent: "space-between",
-          padding: 5,
+          margin: { xs: "auto", md: 0 },
+          padding: { xs: null, md: 5 },
           width: "100%",
         }}
       >
-        <div>
-          <Calender
-            onDateChange={handleDateChange}
-            onDayChange={handleDayChange}
-          />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "",
+          }}
+        >
+          <div
+          >
+            <Calender
+              onDateChange={handleDateChange}
+              onDayChange={handleDayChange}
+            />
+          </div>
         </div>
 
-        <div>
-          <Card
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "auto auto",
-              gap: 3,
-              padding: 3,
-              width: "auto",
-              backgroundColor: "#D9D9D9",
-              borderRadius: 5,
-            }}
-          >
-            {item}
-          </Card>
+        <div style={{
+          marginTop: {xs: 10, md: 10},
+        }}>
+          <div>
+            <Card
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "auto", md: "auto auto" },
+                gap: 3,
+                padding: { xs: 1.35, md: 3 },
+                width: "auto",
+                backgroundColor: "#D9D9D9",
+                borderRadius: 5,
+                overflowY: "auto",
+                scrollBehavior: "smooth",
+                marginTop: {xs: 2, sm: 2, md: 0}, 
+                height: { xs: "34vh", md: null },
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              {item}
+            </Card>
+          </div>
         </div>
       </Box>
     </div>
