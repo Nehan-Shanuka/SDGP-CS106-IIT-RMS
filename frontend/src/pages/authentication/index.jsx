@@ -69,7 +69,7 @@ export default function Authenticator({ userOnBoard }) {
             sx={{
               margin: "auto",
               marginTop: "10%",
-              backgroundColor: "rgb(66, 133, 244)",
+              backgroundColor: "#2A2B36",
               color: "rgb(255, 255, 255)",
               padding: "10px 20px",
               borderRadius: "10px",
@@ -81,7 +81,7 @@ export default function Authenticator({ userOnBoard }) {
               textAlign: "center",
               display: "block",
               ":hover": {
-                backgroundColor: "#ffffff",
+                backgroundColor: "#1C1C1F",
               },
             }}
             onClick={handleAuthenticatorClick}
