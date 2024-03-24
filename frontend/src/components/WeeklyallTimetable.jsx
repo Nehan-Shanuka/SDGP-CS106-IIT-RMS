@@ -8,8 +8,8 @@ import Typography from "@mui/material/Typography";
 // import RedirectButton from "../RedirectButto";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
-import CircularProgress from "@mui/material/CircularProgress";
-import Error from "../assets/ani2.json"
+import Lottie from "lottie-react";
+import Loading from "../assets/loading.json"
 
 // Styled component for individual timetable item
 const Item = styled("div")(({ theme, color }) => ({
@@ -35,8 +35,9 @@ const WeeklyallTimetable = ({ selectedValue }) => {
       try {
         const response = await axios.get("http://localhost:5555/timetables");
         console.log("Response data:", response.data);
-        setTimetableData(response.data);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       } catch (error) {
         console.error("Error fetching timetable data:", error);
         setError(error.message);
@@ -44,40 +45,22 @@ const WeeklyallTimetable = ({ selectedValue }) => {
       }
     };
 
+
     fetchData();
   }, []);
 
   // Display loading message while fetching data
-  useEffect(() => {
-    let timer;
-    if (loading) {
-      // Set timeout for 3 seconds before showing error
-      timer = setTimeout(() => {
-        setLoading(false);
-      }, 3000);
-    }
-
-    return () => clearTimeout(timer); // Clean up the timer
-  }, [loading]);
-
   if (loading) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress size={80} />
-      </Box>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <Lottie animationData={Loading} />
+      </div>
     );
   }
-
+  
 
   if (error) {
-    return <Error/>;
+    return <p>Error: {error}</p>;
   }
 
   // Color options for timetable items
