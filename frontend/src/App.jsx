@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+
+// Component imports
 import Topbar from "./pages/global/Topbar";
 import MyTimetable from "./pages/myTimetable";
 import WeeklyTimetable from "./pages/weeklyTimetable";
@@ -22,15 +24,18 @@ import UsersUploads from "./pages/Upload/UsersUp"
 import StudentUploads from "./pages/Upload/StudentUp"
 
 export default function App() {
+
+  // State management
   const [isSidebar, setIsSidebar] = useState(false);
   const [isWelcome, setIsWelcome] = useState(true);
   const [onBoardUser, setOnBoardUser] = useState();
   const [users, setUsers] = useState();
   const [userFromDB, setUserFromDB] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const [loading, setLoading] = useState(true);
 
+
+  // Fetch users on component mount
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -47,13 +52,17 @@ export default function App() {
   }, []);
 
 
+  // Simulate loading delay
   useEffect(() => {
+
     // Simulate loading time
     setTimeout(() => {
       setLoading(false);
     }, 3000); // Adjust the timeout value as needed
   }, []);
 
+
+  // Handlers for various state updates
   const handleStateChange = (state) => {
     setIsWelcome(state);
   };
@@ -79,6 +88,7 @@ export default function App() {
   console.log("in app ", isAuthenticated);
   console.log("in app", onBoardUser);
 
+  // Render different components based on state
   return (
     <>
       {loading ? <SplashScreen /> : (
