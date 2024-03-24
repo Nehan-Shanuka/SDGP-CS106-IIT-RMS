@@ -30,11 +30,13 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
   return (
     <Card
       sx={{
-        width: isSidebarOpen ? "55%" : "50%",
+        // width: isSidebarOpen ? "55%" : "50%",
+        width: {xs: "100%", sm: "100%", md: "55%"}, // Added this line
         backgroundColor: "#D9D9D9",
         borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
+        marginTop: {xs: 3, sm: 3, md: 0}, // Added this line
       }}
     >
       <CardContent>

@@ -79,7 +79,20 @@ export default function PlannedSessions({ isSidebarOpen }) {
     setType(typeSelect);
   };
 
-  console.log("Hi", selectedDate)
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsVisible(window.innerWidth >= 768); // Adjust the width threshold as needed
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  console.log("Hi", selectedDate);
 
   return (
     <>
@@ -88,17 +101,42 @@ export default function PlannedSessions({ isSidebarOpen }) {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            paddingX: isSidebarOpen ? 10 : 15,
+            flexDirection: { xs: "column", md: "row" },
+            // paddingX: isSidebarOpen ? 10 : 15,
+            paddingX: { xs: 5, md: 10},
             paddingY: 3,
             height: "90vh",
             width: "100%",
           }}
         >
-          <div>
-            <Calender onDateChange={handleDateChange} onDayChange={handleDayChange} />
-            <Location onLocationChange={handleLocationChange} />
-            <Module onModuleChange={handleModuleChange} />
-            <Type onTypeChange={handleTypeChange} />
+          <div
+            style={{
+              display: { xs: "flex", md: "none"},
+              flexDirection: { xs: "row", md: "column"},
+              justifyContent: { xs: "space-between", md: "none" },
+              gap: 2,
+              // width: "100%",
+            }}
+          >
+            <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "",
+            }}
+          >
+            <div><Calender
+              onDateChange={handleDateChange}
+              onDayChange={handleDayChange}
+            /></div>
+            </div>
+            
+            <div style={{ display: isVisible ? 'block' : 'none' }}>
+              
+              <Location onLocationChange={handleLocationChange} />
+              <Module onModuleChange={handleModuleChange} />
+              <Type onTypeChange={handleTypeChange} />
+            </div>
           </div>
 
           <div>
