@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
+import { useState , useEffect} from 'react';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
 
 // Menu item height and padding
 const ITEM_HEIGHT = 48;
@@ -24,18 +23,14 @@ const MenuProps = {
 
 // Array of degree names
 const names = [
-  "BSc(Hons) Computer Science",
-  "BSc(Hons) Software Engineering",
-  "BSc(Hons) Artificial Intelligence and Data Science",
+  'BSc(Hons) Computer Science',
+  'BSc(Hons) Software Engineering',
+  'BSc(Hons) Artificial Intelligence and Data Science',
 ];
 
-<<<<<<< HEAD
 
 // Multiple selection with checkboxes
 export default function MultipleSelectCheckmarks({onDegreeChange}) {
-=======
-export default function MultipleSelectCheckmarks({ onDegreeChange }) {
->>>>>>> 8c94cc6014618b017cf49e8fe8c7720496a2daba
   const [degreeName, setdegreeName] = useState([]);
 
 
@@ -43,6 +38,7 @@ export default function MultipleSelectCheckmarks({ onDegreeChange }) {
   useEffect(() => {
     onDegreeChange(degreeName);
   }, [degreeName, onDegreeChange]);
+  
 
   // Event handler for changing selected degree names
   const handleChange = (event) => {
@@ -51,7 +47,7 @@ export default function MultipleSelectCheckmarks({ onDegreeChange }) {
     } = event;
     setdegreeName(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof value === 'string' ? value.split(',') : value,
     );
   };
   console.log(degreeName);
@@ -59,7 +55,7 @@ export default function MultipleSelectCheckmarks({ onDegreeChange }) {
 
   return (
     <div>
-      <FormControl sx={{ marginTop: 1, width: 300 }} className="bg-white">
+      <FormControl sx={{ marginTop: 1, width: 300  }} className='bg-white'>
         <InputLabel id="demo-multiple-checkbox-label">Select Degree</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
@@ -67,7 +63,7 @@ export default function MultipleSelectCheckmarks({ onDegreeChange }) {
           value={degreeName}
           onChange={handleChange}
           input={<OutlinedInput label="Select Degree" />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
