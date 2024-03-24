@@ -7,7 +7,6 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import * as XLSX from 'xlsx';
 
-
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
   clipPath: 'inset(50%)',
@@ -21,59 +20,84 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function InputFileUpload() {
-
   const [file, setFile] = React.useState(null);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState('');
-  // const [jsonData, setJsonData] = useState("");
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
   };
 
+  const formatData = (jsonData) => {
+    const formattedData = jsonData.map(entry => ({
+      id: entry.id,
+      name: entry.name,
+      email: entry.email,
+      op1: entry.op1,
+      op2: entry.op2,
+      group: entry.group
+    }));
+    return formattedData;
+  };
+
   const handleUpload = () => {
     if (!file) {
       setSnackbarMessage("No file selected");
       setOpenSnackbar(true);
-    } else {
-      const reader = new FileReader();
-      
-
-      reader.onload = () => {
-        try {
-          
-          const fileContent = reader.result;
-          if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
-            throw new Error('Unsupported file format. Please select an Excel file.');
-          }
-  
-          const arrayBuffer = reader.result;
-          const data = new Uint8Array(arrayBuffer);
-          const workbook = XLSX.read(data, { type: 'array' });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
-          const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-          console.log('Converted JSON data:', jsonData);
-          setSnackbarMessage('File converted to JSON successfully.');
-          setOpenSnackbar(true);
-
-          // Handle file upload logic here
-          console.log('Uploading file:', file);
-          setSnackbarMessage('File uploaded successfully.');
-          setOpenSnackbar(true);
-        } catch (error) {
-          console.error('Error converting file to JSON:', error);
-          setSnackbarMessage('Error converting file to JSON.'+ error.message);
-          setOpenSnackbar(true);
-          setFile(null);
-
-        }
-      };
-
-      reader.readAsText(file);
+      return; // Exit the function if no file is selected
     }
+
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+      try {
+        const arrayBuffer = reader.result;
+        const data = new Uint8Array(arrayBuffer);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+        console.log('Converted JSON data:', jsonData);
+        
+        const formattedData = formatData(jsonData);
+
+        fetch('http://localhost:5555/students', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formattedData)
+          
+        })
+        console.log(formattedData)
+
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to post data to the server');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Data posted successfully:', data);
+          setSnackbarMessage('File uploaded and data posted to server successfully.');
+          setOpenSnackbar(true);
+        })
+        .catch(error => {
+          console.error('Error posting data to server:', error);
+          setSnackbarMessage('Error posting data to server: ' + error.message);
+          setOpenSnackbar(true);
+        });
+      } catch (error) {
+        console.error('Error converting file to JSON:', error);
+        setSnackbarMessage('Error converting file to JSON: ' + error.message);
+        setOpenSnackbar(true);
+        setFile(null);
+      }
+    };
+
+    reader.readAsArrayBuffer(file);
 
     // Reset the file state after upload if needed
     setFile(null);
