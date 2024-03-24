@@ -14,10 +14,12 @@ export default function Reservation({ isSidebarOpen }) {
   const [selectedDate, setSelectedDate] = useState();
   const [day, setDay] = useState();
 
+  // Function to handle day change in the calendar
   const handleDayChange = (day) => {
     setDay(day);
   };
 
+  // Fetch hall data based on selected building ID
   useEffect(() => {
     const url = `http://localhost:5555/halls?buildingID=${buildingID}`;
     axios
@@ -30,6 +32,7 @@ export default function Reservation({ isSidebarOpen }) {
       });
   }, [buildingID]);
 
+  // Fetch building data on component mount
   useEffect(() => {
     axios
       .get("http://localhost:5555/buildings")
@@ -41,10 +44,12 @@ export default function Reservation({ isSidebarOpen }) {
       });
   }, []);
 
+  // Function to handle location (building) change
   const handleLocationChange = (locationName) => {
     setBuildingID(locationName);
   };
 
+  // Function to handle date change
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };

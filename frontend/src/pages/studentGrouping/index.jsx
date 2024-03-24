@@ -9,6 +9,7 @@ import Module from "../../components/ModuleSelection";
 import Type from "../../components/TypeSelection";
 import Group from "../../components/GroupSelection";
 
+// Sample courses data 
 const courses = [
   {
     hallNumber: "AUD",
@@ -101,7 +102,7 @@ export default function StdGrouping() {
                 },
               }}
             >
-              Search
+              Search 
             </Button>
           </div>
 

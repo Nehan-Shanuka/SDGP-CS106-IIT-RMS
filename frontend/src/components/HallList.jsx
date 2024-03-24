@@ -9,6 +9,7 @@ import styled from "@mui/material/styles/styled";
 import { Button } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
 
+// Styled component for each item
 const Item = styled(Paper)(({ color }) => ({
   backgroundColor: color,
   color: "#fff",
@@ -18,12 +19,14 @@ const Item = styled(Paper)(({ color }) => ({
   borderRadius: 15,
 }));
 
+// displaying list of halls, courses, or reservations
 export default function HallList({ color, status, newcourses }) {
   const [hoveredItem, setHoveredItem] = useState(null);
 
   const courses = newcourses;
 
   return (
+    // Main card container
     <Card
       sx={{
         width: "45%",
