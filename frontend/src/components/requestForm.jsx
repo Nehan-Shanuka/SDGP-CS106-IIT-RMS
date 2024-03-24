@@ -17,6 +17,9 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -170,6 +173,8 @@ export default function RequestForm({
   // console.log(dateSelected, dayFromCalender)
 
   // Handle the request to make a reservation
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const handleRequest = async () => {
     axios
       .post(`http://localhost:5555/reservations/${hallID}`, {
@@ -188,12 +193,21 @@ export default function RequestForm({
         description: description,
       })
       .then((response) => {
-        alert("Reservation added successfully!");
+        setOpenSnackbar(true); // Open Snackbar on successful reservation
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+  
+    setOpenSnackbar(false);
+  };
+  
 
   // Handle the radio button change
   const handleRadioChange = (event) => {
@@ -542,6 +556,22 @@ export default function RequestForm({
               Make Request
             </h5>
           </Button>
+          <Snackbar
+  open={openSnackbar}
+  autoHideDuration={6000}
+  onClose={handleCloseSnackbar}
+>
+  <MuiAlert
+    elevation={6}
+    variant="filled"
+    onClose={handleCloseSnackbar}
+    severity="success"
+    className="ml-[-1.5%] "
+  >
+    Reservation added successfully!
+  </MuiAlert>
+</Snackbar>
+
         </div>
       </div>
     </Box>
