@@ -2,23 +2,25 @@ import { DocumentTextIcon } from "@heroicons/react/20/solid";
 import { motion } from "framer-motion";
 import AnimText from "./AnimText";
 
+// Variants for the container animation, controls how it appears
 const containerVariants = {
-  hidden: {
+  hidden: { // Initial state before animation
     opacity: 0,
     y: 30
   },
-  visible: {
+  visible: { // Initial state before animation
     opacity: 1,
     y: 0,
-    transition: {
+    transition: { // Transition details for the animation
       duration: 0.3,
       ease: "easeOut",
-      delayChildren: 0.3,
-      staggerChildren: 0.1
+      delayChildren: 0.3, // Delay for animating child components
+      staggerChildren: 0.1 // Stagger the animation of child components
     }
   }
 };
 
+// Variants for individual item animations within the container
 const itemVariants = {
   hidden: {
     opacity: 0,
@@ -36,6 +38,7 @@ const itemVariants = {
 
 export default function A4Animation() {
   return (
+    // Parent container with framer motion animation
     <motion.div className="flex w-full select-none items-center justify-center ">
       <motion.div
         variants={containerVariants}
