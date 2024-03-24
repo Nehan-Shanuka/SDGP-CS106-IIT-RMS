@@ -8,6 +8,10 @@ import Typography from "@mui/material/Typography";
 import RedirectButton from "../RedirectButto";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
+import Lottie from "lottie-react";
+import Loading from "../../assets/loading.json"
+import Error from "../../assets/error.json"
+
 
 const Item = styled("div")(({ theme, color }) => ({
   backgroundColor: color,
@@ -31,7 +35,10 @@ const NestedGrid = ({ user }) => {
         const response = await axios.get("http://localhost:5555/timetables");
         console.log("Response data:", response.data);
         setTimetableData(response.data);
-        setLoading(false);
+        setLoading(true); // Set loading to true to display loading indicator
+        setTimeout(() => {
+          setLoading(false); // After 3 seconds, set loading to false to display content
+        }, 2000);
       } catch (error) {
         console.error("Error fetching timetable data:", error);
         setError(error.message);
@@ -43,11 +50,33 @@ const NestedGrid = ({ user }) => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Lottie animationData={Loading} /> 
+      </Box>
+    );
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Lottie animationData={Error}/>
+      </Box>
+    );
   }
 
   console.log("user", user);
