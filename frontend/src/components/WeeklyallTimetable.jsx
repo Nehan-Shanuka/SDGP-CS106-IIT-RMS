@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 // import RedirectButton from "../RedirectButto";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
+import CircularProgress from "@mui/material/CircularProgress";
+import Error from "../assets/ani2.json"
 
 // Styled component for individual timetable item
 const Item = styled("div")(({ theme, color }) => ({
@@ -46,12 +48,36 @@ const WeeklyallTimetable = ({ selectedValue }) => {
   }, []);
 
   // Display loading message while fetching data
+  useEffect(() => {
+    let timer;
+    if (loading) {
+      // Set timeout for 3 seconds before showing error
+      timer = setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timer); // Clean up the timer
+  }, [loading]);
+
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress size={80} />
+      </Box>
+    );
   }
 
+
   if (error) {
-    return <p>Error: {error}</p>;
+    return <Error/>;
   }
 
   // Color options for timetable items
