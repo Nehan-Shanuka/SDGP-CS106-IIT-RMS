@@ -43,7 +43,7 @@ router.post("/", async (request, response) => {
         const timeSession = timeSessions[time];
         // console.log(timeSession);
 
-        if (timeSession.hallID === undefined) {
+        if (timeSession.hallID === undefined || timeSession.hallID === null) {
           continue;
         } else {
           const building = await Building.findOne({
