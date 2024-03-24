@@ -7,8 +7,11 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 
+// Menu item height and padding
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
+
+// Menu props for Select component
 const MenuProps = {
   PaperProps: {
     style: {
@@ -18,20 +21,26 @@ const MenuProps = {
   },
 };
 
+// Array of degree names
 const names = [
   'BSc(Hons) Computer Science',
   'BSc(Hons) Software Engineering',
   'BSc(Hons) Artificial Intelligence and Data Science',
 ];
 
+
+// Multiple selection with checkboxes
 export default function MultipleSelectCheckmarks({onDegreeChange}) {
   const [degreeName, setdegreeName] = useState([]);
 
+
+  // Call onDegreeChange callback when degreeName changes
   useEffect(() => {
     onDegreeChange(degreeName);
   }, [degreeName, onDegreeChange]);
   
 
+  // Event handler for changing selected degree names
   const handleChange = (event) => {
     const {
       target: { value },
@@ -42,6 +51,7 @@ export default function MultipleSelectCheckmarks({onDegreeChange}) {
     );
   };
   console.log(degreeName);
+
 
   return (
     <div>
