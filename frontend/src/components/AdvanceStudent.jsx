@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import * as XLSX from 'xlsx';
+import axios from 'axios';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -63,24 +64,10 @@ export default function InputFileUpload() {
         
         const formattedData = formatData(jsonData);
 
-        fetch('http://localhost:5555/students', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formattedData)
-          
-        })
-        console.log(formattedData)
-
+        formattedData.forEach((entry) => {
+        axios.post('http://localhost:5555/students', entry)
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to post data to the server');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Data posted successfully:', data);
+          console.log('Data posted successfully:', response.data);
           setSnackbarMessage('File uploaded and data posted to server successfully.');
           setOpenSnackbar(true);
         })
@@ -89,6 +76,34 @@ export default function InputFileUpload() {
           setSnackbarMessage('Error posting data to server: ' + error.message);
           setOpenSnackbar(true);
         });
+      });
+
+        // fetch('http://localhost:5555/students', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(formattedData)
+          
+        // })
+        // console.log(formattedData)
+
+        // .then(response => {
+        //   if (!response.ok) {
+        //     throw new Error('Failed to post data to the server');
+        //   }
+        //   return response.json();
+        // })
+        // .then(data => {
+        //   console.log('Data posted successfully:', data);
+        //   setSnackbarMessage('File uploaded and data posted to server successfully.');
+        //   setOpenSnackbar(true);
+        // })
+        // .catch(error => {
+        //   console.error('Error posting data to server:', error);
+        //   setSnackbarMessage('Error posting data to server: ' + error.message);
+        //   setOpenSnackbar(true);
+        // });
       } catch (error) {
         console.error('Error converting file to JSON:', error);
         setSnackbarMessage('Error converting file to JSON: ' + error.message);
@@ -96,6 +111,7 @@ export default function InputFileUpload() {
         setFile(null);
       }
     };
+    
 
     reader.readAsArrayBuffer(file);
 
@@ -113,6 +129,16 @@ export default function InputFileUpload() {
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
+
+  // useEffect(() => {
+  //   axios.post('http://localhost:5555/students')
+  //   .then(response => {
+  //     console.log(response.data);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching data:', error);
+  //   });
+  // }, []);
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>

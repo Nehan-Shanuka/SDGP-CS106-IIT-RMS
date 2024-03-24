@@ -9,6 +9,7 @@ import MuiAlert from "@mui/material/Alert";
 import * as XLSX from "xlsx";
 import MultipleSelectCheckmarks from "./DegreeSelection";
 import Groupselect from "./GroupSelection";
+import axios from "axios";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -65,8 +66,8 @@ export default function InputFileUpload() {
 
         // Restructure jsonData into the desired format
         const formattedData = {
-          groupName: group,
-          course: degree,
+          groupName: group[0],
+          course: degree[0],
           sessions: [],
         };
 
@@ -85,13 +86,22 @@ export default function InputFileUpload() {
           if (!acc[day]) {
             acc[day] = {};
           }
-          acc[day][sessionKey] = {
+
+          // console.log("Acc:", acc[day][sessionKey]);
+
+          buildingID === undefined ? (acc[day][sessionKey] = null) : (acc[day][sessionKey] = {
             buildingID,
             hallID,
             type,
             subject,
             lecturer,
-          };
+          });
+          
+
+          // if (acc[buildingID] === null) {
+          //   acc[day][sessionKey] = null;
+          // }
+
           return acc;
         }, {});
 
@@ -99,6 +109,21 @@ export default function InputFileUpload() {
         Object.entries(groupedSessions).forEach(([day, sessions]) => {
           formattedData.sessions.push({ day, timeSessions: sessions });
         });
+
+        console.log("Formatted data:", formattedData);
+
+        
+          axios.post('http://localhost:5555/timetables', formattedData)
+          .then(response => {
+            console.log('Data posted successfully:', response.data);
+            setSnackbarMessage('File uploaded and data posted to server successfully.');
+            setOpenSnackbar(true);
+          })
+          .catch(error => {
+            console.error('Error posting data to server:', error);
+            setSnackbarMessage('Error posting data to server: ' + error.message);
+            setOpenSnackbar(true);
+          });
 
         console.log("Converted JSON data:", formattedData);
         setSnackbarMessage("File converted to JSON successfully.");
@@ -142,7 +167,7 @@ export default function InputFileUpload() {
       <Groupselect degree={degree} onGroupChange={handleGroupPath} />
       {group !== undefined && degree !== undefined ? (
         <div className="flex flex-col my-5">
-          {/* <label htmlFor="file-upload"> */}
+          <label htmlFor="file-upload">
           <Button
             component="span"
             role={undefined}
@@ -154,7 +179,7 @@ export default function InputFileUpload() {
           >
             Upload file
           </Button>
-          {/* </label> */}
+          </label>
           <VisuallyHiddenInput
             id="file-upload"
             type="file"
