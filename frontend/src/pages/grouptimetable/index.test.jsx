@@ -14,4 +14,13 @@ describe('Grouptimetable component', () => {
     expect(getByTestId('weekly-timetable')).toBeInTheDocument();
   }); 
 
+  it('updates selectedValue state when selecting a value in BasicSelect component', () => {
+    const { getByTestId } = render(<Grouptimetable />);
+    const selectElement = getByTestId('basic-select').querySelector('select');
+    
+    fireEvent.change(selectElement, { target: { value: 'CS-B' } });
+
+    expect(selectElement.value).toBe('CS-B');
+
+  });
 });
