@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 function ProfilePage({ userFromDB, onLogout }) {
   const [user, setUser] = useState(userFromDB);
 
+
   const handleLogout = () => {
     setUser(null);
     onLogout(user);
@@ -14,6 +15,25 @@ function ProfilePage({ userFromDB, onLogout }) {
     if (user === null) onLogout(user);
   }, [user, onLogout]);
 
+// rendering user profile information and logout functionality
+function ProfilePage({userFromDB,onLogout}) {
+
+  // manage user data and errors
+  const [usersData, setuserData] = useState([]);
+  //const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null); 
+   const [user, setUser] = useState(userFromDB);
+   
+
+  // Function to handle user logout 
+  const handleLogout=()=>{setUser(null)}
+   useEffect(() => {
+   if (user===null) onLogout(user)} ,[user,onLogout]);
+    
+
+  console.log("newuser:",userFromDB);
+
+  // Sample user data
   const userData = {
     name: "Lionel Messi",
     indexNo: "101010",
@@ -83,6 +103,8 @@ function ProfilePage({ userFromDB, onLogout }) {
   );
 }
 
+
+// Component to display user information
 function UserInfo({ label, value }) {
   return (
     <div className="mb-4">
