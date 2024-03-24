@@ -84,6 +84,8 @@ export default function App() {
     setIsAuthenticated(false);
   };
 
+
+  console.log("in app ", userFromDB);
   // console.log("in app ", isAuthenticated);
   // console.log("in app", onBoardUser);
 
@@ -111,7 +113,7 @@ export default function App() {
                 <Route path="/my-timetable" element={<MyTimetable />} />
                 <Route
                   path="/reservations"
-                  element={<Reservation isSidebarOpen={isSidebar} />}
+                  element={<Reservation isSidebarOpen={isSidebar} user={userFromDB} />}
                 />
                 <Route
                   path="/planned-sessions"
