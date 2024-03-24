@@ -10,6 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 
+// Constants for menu item height and padding
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -21,6 +22,7 @@ const MenuProps = {
   },
 };
 
+// List of module names
 const names = [
   "Object Oriented Programming",
   "Algorithms and Data Structures",
@@ -30,9 +32,12 @@ const names = [
   "Client Server Architecture",
 ];
 
+
+// MultipleSelectCheckmarks component for selecting multiple modules
 export default function MultipleSelectCheckmarks({ onModuleChange }) {
   const [moduleSelect, setModuleSelect] = useState([]);
 
+  // Function to handle module selection change
   const handleChange = (event) => {
     const {
       target: { value },
@@ -43,6 +48,7 @@ export default function MultipleSelectCheckmarks({ onModuleChange }) {
     );
   };
 
+  // Effect to trigger the callback when module selection changes
   useEffect(() => {
     onModuleChange(moduleSelect);
   }, [moduleSelect, onModuleChange]);
@@ -67,6 +73,7 @@ export default function MultipleSelectCheckmarks({ onModuleChange }) {
           )}
           MenuProps={MenuProps}
         >
+          {/* Menu items for selecting modules */}
           {names.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={moduleSelect.indexOf(name) > -1} />
