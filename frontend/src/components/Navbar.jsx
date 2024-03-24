@@ -10,7 +10,9 @@ import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { createElement } from "react";
 
+// Navbar component that displays a list of menu items
 const Navbar = ({ onSidebarOpen }) => {
+  // Array containing menu items with their names, links, and icons
   const menus = [
     { name: "My Timetable", link: "my-timetable", icon: MdOutlineDashboard },
     { name: "Group Timetables", link: "group-timetable", icon: FaPeopleGroup },
@@ -28,9 +30,12 @@ const Navbar = ({ onSidebarOpen }) => {
     { name: "Group Details", link: "group-details", icon: TbListDetails },
     { name: "Review Requests", link: "review-requests", icon: RiSettings4Line },
   ];
+
+  // States for managing the open/close state of the sidebar and the selected menu item
   const [open, setOpen] = useState(true);
   const [selected, setSelected] = useState(null);
 
+  // Effect to update the sidebar state
   useEffect(() => {
     onSidebarOpen(open);
   }, [open, onSidebarOpen]);
@@ -41,6 +46,7 @@ const Navbar = ({ onSidebarOpen }) => {
         open ? "w-72" : "w-16"
       } duration-500 text-gray-100 h-screen`}
     >
+      {/* Header section */}
       <div className="flex justify-between items-center bg-stone-200">
         <h2
           onClick={() => setOpen(!open)}
@@ -55,6 +61,7 @@ const Navbar = ({ onSidebarOpen }) => {
         >
           IIT RMS
         </h2>
+        {/* Menu button */}
         <div
           style={{
             transitionDelay: "1000ms",
@@ -83,6 +90,7 @@ const Navbar = ({ onSidebarOpen }) => {
               selected === i && "bg-stone-200"
             } group flex items-center text-sm  gap-3.5 px-[1.27rem] py-3 hover:bg-stone-200 mt-1`}
           >
+            {/* Menu Icon */}
             <div
               style={
                 open
@@ -101,6 +109,8 @@ const Navbar = ({ onSidebarOpen }) => {
             >
               {createElement(menu?.icon, { size: "25" })}
             </div>
+            
+            {/* Menu Name */}
             <h2
               style={{
                 transitionDelay: `${i}00ms`,
