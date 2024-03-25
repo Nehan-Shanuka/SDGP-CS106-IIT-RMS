@@ -4,9 +4,9 @@ import UploadsPage from "../../components/UploadsPage";
 import SimpleTypewriter from "../../components/SimpleTypewriting";
 import MultiActionAreaCard from "../../components/MultiActionAreaCard";
 import { Button, Card } from "@mui/material";
-import img1 from "../../assets/time1.jpg";
-import img2 from "../../assets/student.png";
-import img3 from "../../assets/users.jpeg";
+import img1 from "../../assets/timetable2.jpeg"
+import img2 from "../../assets/student1.jpeg"
+import img3 from "../../assets/users.jpeg"
 
 // Component for the Upload Page
 export default function UploadPage() {
