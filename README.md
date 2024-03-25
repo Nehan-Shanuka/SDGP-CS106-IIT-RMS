@@ -3,6 +3,14 @@
 
 The IIT RMS is a Resource Management System for the Informatics Institute of Technology (IIT Sri Lanka).
 
+### Zip file - Open Steps
+in new terminal,
+    1. cd backend
+    2. npm run dev
+in new terminal,
+    1. cd frontend
+    2. npm run dev
+    
 ### Facilitates the IIT RMS is proposed to provide
 
 1. **Real-time Hall Management Facility (Critical)**
@@ -20,9 +28,9 @@ _It also provides the manual changing facility._
 
 ### Technologies are proposed to use
 
-    1. ReactJs - FrontEnd Development
-    2. ASP.Net Core - BackEnd Development
-    3. PostgreSQL - Database Management System
+    1. ReactJs/ Tailwind CSS/ Material UI - FrontEnd Development
+    2. NodeJs/ ExpressJs - BackEnd Development
+    3. MongoDB - Database Management System
 
 ### Team Members
 
