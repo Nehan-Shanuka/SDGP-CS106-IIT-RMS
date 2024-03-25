@@ -23,7 +23,7 @@ router.post("/", async (request, response) => {
   console.log(students.length);
   const studentGrouping = new StudentGrouping(students);
 
-  // const newGroup = new Group(request.body);
+  const newGroup = new Group(studentGrouping);
 
   try {
     const group = await Group.create(studentGrouping);

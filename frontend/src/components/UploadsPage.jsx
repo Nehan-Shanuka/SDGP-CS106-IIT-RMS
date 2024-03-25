@@ -5,9 +5,9 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Uploadicon from "../images/6323.jpg";
 import Card from "@mui/material/Card";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import SimpleTypewriter from "./SimpleTypewriting"
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import SimpleTypewriter from "./SimpleTypewriting";
 
 // Styled component for visually hidden input
 const VisuallyHiddenInput = styled("input")({
@@ -55,16 +55,16 @@ export default function InputFileUpload() {
           let endpoint;
           switch (dataType) {
             case "timetables":
-              endpoint = "http://localhost:5555/timetables";
+              endpoint = "https://sdgp-cs106-iit-rms.onrender.com/timetables";
               break;
             case "resources":
-              endpoint = "http://localhost:5555/halls";
+              endpoint = "https://sdgp-cs106-iit-rms.onrender.com/halls";
               break;
             case "students":
-              endpoint = "http://localhost:5555/students";
+              endpoint = "https://sdgp-cs106-iit-rms.onrender.com/students";
               break;
             case "lecturers":
-              endpoint = "http://localhost:5555/lecturers";
+              endpoint = "https://sdgp-cs106-iit-rms.onrender.com/lecturers";
               break;
             default:
               setUploadMessage("Invalid data type");
@@ -78,7 +78,6 @@ export default function InputFileUpload() {
           setUploadMessage("File uploaded successfully");
           setOpenSnackbar(true);
           console.log("File uploaded successfully", response.data);
-
         } catch (error) {
           // Catch errors related to JSON parsing or uploading
           setUploadMessage("Error uploading file");
@@ -98,7 +97,7 @@ export default function InputFileUpload() {
 
   const handleCloseSnackbar = (event, reason) => {
     // Function to handle closing the Snackbar
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -106,13 +105,23 @@ export default function InputFileUpload() {
   };
 
   return (
-
-  
-    <div style={{ paddingBottom: "6rem", marginLeft: "20px", marginRight: "1rem" }}>
-      <div style={{ display: "flex", marginTop: "30px", justifyContent: "space-between", padding: "0 12rem" }}>
+    <div
+      style={{ paddingBottom: "6rem", marginLeft: "20px", marginRight: "1rem" }}
+    >
+      <div
+        style={{
+          display: "flex",
+          marginTop: "30px",
+          justifyContent: "space-between",
+          padding: "0 12rem",
+        }}
+      >
         <Card sx={{ border: 2, borderColor: "black" }}>
           <div>
-            <img src={Uploadicon} style={{ width: "10rem", marginLeft: "17%" }} />
+            <img
+              src={Uploadicon}
+              style={{ width: "10rem", marginLeft: "17%" }}
+            />
             <Button
               style={{ width: "15rem" }}
               component="label"
@@ -130,7 +139,10 @@ export default function InputFileUpload() {
 
         <Card sx={{ border: 2, borderColor: "black" }}>
           <div>
-            <img src={Uploadicon} style={{ width: "10rem", marginLeft: "17%" }} />
+            <img
+              src={Uploadicon}
+              style={{ width: "10rem", marginLeft: "17%" }}
+            />
             <Button
               style={{ width: "15rem" }}
               component="label"
@@ -148,7 +160,10 @@ export default function InputFileUpload() {
 
         <Card sx={{ border: 2, borderColor: "black" }}>
           <div>
-            <img src={Uploadicon} style={{ width: "10rem", marginLeft: "17%" }} />
+            <img
+              src={Uploadicon}
+              style={{ width: "10rem", marginLeft: "17%" }}
+            />
             <Button
               style={{ width: "15rem" }}
               component="label"
@@ -166,7 +181,10 @@ export default function InputFileUpload() {
 
         <Card sx={{ border: 2, borderColor: "black" }}>
           <div>
-            <img src={Uploadicon} style={{ width: "10rem", marginLeft: "17%" }} />
+            <img
+              src={Uploadicon}
+              style={{ width: "10rem", marginLeft: "17%" }}
+            />
             <Button
               style={{ width: "15rem" }}
               component="label"
@@ -182,17 +200,20 @@ export default function InputFileUpload() {
           </div>
         </Card>
       </div>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <MuiAlert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           {uploadMessage}
         </MuiAlert>
       </Snackbar>
-<div>
-
-
-</div>
-
-
+      <div></div>
     </div>
   );
 }
