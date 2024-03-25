@@ -6,11 +6,12 @@ The IIT RMS is a Resource Management System for the Informatics Institute of Tec
 ### Zip file - Open Steps
 **in new terminal,**
 1. cd backend
-2. npm run dev
-3. 
+2. npm i
+3. npm run dev
 **in new terminal,**
 1. cd frontend
-2. npm run dev
+2. npm i
+3. npm run dev
     
 ### Facilitates the IIT RMS is proposed to provide
 
