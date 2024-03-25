@@ -8,6 +8,7 @@ The IIT RMS is a Resource Management System for the Informatics Institute of Tec
 1. cd backend
 2. npm i
 3. npm run dev
+
 **in new terminal,**
 1. cd frontend
 2. npm i
