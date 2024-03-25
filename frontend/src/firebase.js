@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "iit-rms",
   storageBucket: "iit-rms.appspot.com",
   messagingSenderId: "142139928620",
-  appId: "1:142139928620:web:173fe114b7547779462189"
+  appId: "1:142139928620:web:173fe114b7547779462189",
 };
 
 // Initialize Firebase

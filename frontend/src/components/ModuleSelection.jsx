@@ -32,7 +32,6 @@ const names = [
   "Client Server Architecture",
 ];
 
-
 // MultipleSelectCheckmarks component for selecting multiple modules
 export default function MultipleSelectCheckmarks({ onModuleChange }) {
   const [moduleSelect, setModuleSelect] = useState([]);

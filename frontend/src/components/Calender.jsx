@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-// import * as React from 'react';
 import { useEffect, useState } from "react";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
@@ -23,8 +22,6 @@ export default function Calender({ onDateChange, onDayChange }) {
   const today = new Date();
   const [selectedDate, setSelectedDate] = useState();
   const [day, setDay] = useState(daysOfWeek[today.getDay()]);
-
-  // console.log(day);
 
   // Handle date change and update day
   const handleDateChange = (date) => {
@@ -50,13 +47,6 @@ export default function Calender({ onDateChange, onDayChange }) {
           <DateCalendar
             value={selectedDate}
             onChange={handleDateChange}
-            // sx={{
-            //   border: "1px solid #D9D9D9",
-            //   borderRadius: 2,
-            //   ":hover": {
-            //     border: "1px solid black",
-            //   },
-            // }}
             className="border-4 border-stone-200 rounded-lg hover:border-[#3E737A]"
           />
         </DemoItem>

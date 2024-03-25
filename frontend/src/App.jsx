@@ -70,7 +70,6 @@ export default function App() {
 
   const handleUser = (user) => {
     setOnBoardUser(user);
-    // console.log("in app", user);
     users?.map((userFromDB) => {
       if (userFromDB.email === user.email) {
         setUserFromDB(userFromDB);
@@ -82,10 +81,6 @@ export default function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
   };
-
-  console.log("in app ", userFromDB);
-  // console.log("in app ", isAuthenticated);
-  // console.log("in app", onBoardUser);
 
   // Render different components based on state
   return (
@@ -107,8 +102,11 @@ export default function App() {
             <main className="w-full">
               <Topbar user={userFromDB} />
               <Routes>
-                <Route path="/" element={<MyTimetable />} />
-                <Route path="/my-timetable" element={<MyTimetable />} />
+                <Route path="/" element={<MyTimetable user={userFromDB} />} />
+                <Route
+                  path="/my-timetable"
+                  element={<MyTimetable user={userFromDB} />}
+                />
                 <Route
                   path="/reservations"
                   element={
@@ -119,7 +117,14 @@ export default function App() {
                   path="/planned-sessions"
                   element={<PlannedSessions isSidebarOpen={isSidebar} />}
                 />
-                <Route path="/student-grouping" element={<StdGrouping />} />
+                {userFromDB.adminPrivilege ? (
+                  <Route
+                    path="/student-grouping"
+                    element={<UnderManintainCall />}
+                  />
+                ) : (
+                  <Route path="/student-grouping" element={<SorryCall />} />
+                )}
                 <Route path="/group-details" element={<UnderManintainCall />} />
                 {userFromDB.adminPrivilege ? (
                   <Route

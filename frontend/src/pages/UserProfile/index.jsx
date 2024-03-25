@@ -30,11 +30,7 @@ function ProfilePage({ userFromDB, onLogout }) {
   return (
     <div>
       <div className="flex justify-end mt-[-30px]">
-        <div className="flex justify-end pt-5 pr-5 space-x-2">
-          {/* <Button variant="contained" color="info" style={{ marginRight: '8px' }}>
-      Update Profile
-      </Button> */}
-        </div>
+        <div className="flex justify-end pt-5 pr-5 space-x-2"></div>
       </div>
       <section className="container py-2 mt-5">
         <div
@@ -53,10 +49,7 @@ function ProfilePage({ userFromDB, onLogout }) {
               className="mx-auto mb-4 rounded-full w-36 h-34"
             />
             {<p className="mb-1 text-white">{userFromDB.name}</p>}
-            <div className="flex justify-center gap-1">
-              {/* <button className="px-5 py-2 text-white bg-blue-500 rounded">{userData.level}</button>
-              <button className="px-5 py-2 text-white bg-blue-500 rounded">{userData.course}</button> */}
-            </div>
+            <div className="flex justify-center gap-1"></div>
           </div>
 
           <div

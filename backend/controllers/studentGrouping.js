@@ -22,8 +22,6 @@ function StudentGrouping(students) {
     (student) => !student.op1 || !student.op2
   );
 
-  //   console.log(stdOnlyOneOp);
-
   const onlyOpGroup = moduleNames.map((module) => {
     const moduleOnly = stdOnlyOneOp.filter(
       (std) => std.op1 === module || std.op2 === module
@@ -31,13 +29,9 @@ function StudentGrouping(students) {
     return { name: module, count: moduleOnly.length, students: moduleOnly };
   });
 
-  //   console.log(onlyOpGroup);
-
   const stdWithBothOptions = students.filter(
     (student) => student.op1 && student.op2
   );
-
-  //   const opAsML = chosenModule(stdWithBothOptions, "ML");
   //   const opAsAL = chosenModule(stdWithBothOptions, "AL");
   //   const opAsMAD = chosenModule(stdWithBothOptions, "MAD");
   //   const opAsSWD = chosenModule(stdWithBothOptions, "SWD");
@@ -87,8 +81,6 @@ function StudentGrouping(students) {
 
   combinedArray.sort((a, b) => b.count - a.count);
 
-  //   console.log(combinedArray);
-
   const groupMaxCount = 10;
   const groupMinCount = 5;
 
@@ -103,10 +95,6 @@ function StudentGrouping(students) {
   const minCombinations = combinedArray.filter(
     (com) => com.count < groupMinCount
   );
-
-  //   console.log(maxCombinations);
-  //   console.log(minMaxGroupCombinations);
-  //   console.log(minCombinations);
 
   const mainGroups = [];
   let stdWithNoGroup = [];
@@ -131,15 +119,12 @@ function StudentGrouping(students) {
   addMinCombinationsToMainGroups(minCombinations, mainGroups, stdWithNoGroup);
   NoGroupStudents(stdWithNoGroup, mainGroups, groupMaxCount);
 
-  console.log("MAIN GROUP: ", mainGroups);
-
   stdWithNoGroup = stdWithNoGroup.reduce((accumulator, currentValue) => {
     if (!accumulator.includes(currentValue)) {
       accumulator.push(currentValue);
     }
     return accumulator;
   }, []);
-  console.log("NO GROUP: ", stdWithNoGroup);
 
   stdWithNoGroup = addNoGroupStdsToFinalGroups(
     stdWithNoGroup,
@@ -147,13 +132,8 @@ function StudentGrouping(students) {
     groupMaxCount
   );
 
-  console.log("MAIN GROUP: ", mainGroups);
-  console.log("NO GROUP: ", stdWithNoGroup);
-
   return mainGroups;
 }
-
-// organizedAlgo(stdOpHave);
 
 function chosenModule(students, option) {
   return students.filter(
@@ -183,7 +163,6 @@ function addMinMaxCombinationsToMainGroups(minMaxCombinations, mainGroups) {
   minMaxCombinations.forEach((group) => {
     const tempGroup = [];
     const modules = [];
-    // console.log("Group: ", group);
 
     group.students.forEach((student) => {
       tempGroup.push(student);
@@ -197,7 +176,6 @@ function addMinMaxCombinationsToMainGroups(minMaxCombinations, mainGroups) {
     const uniqueModules = getUniqueElements(modules);
     const groupFormed = { students: tempGroup, modules: uniqueModules };
     mainGroups.push(groupFormed);
-    // console.log("MAIN GROUP: ", mainGroups);
   });
 }
 
@@ -209,7 +187,6 @@ function addMaxCombinationsToMainGroups(
   noGroupStds
 ) {
   maxCombinations.forEach((group) => {
-    // console.log("Group: ", group);
     let groupCount = group.count;
     let studentCount = 0;
 
@@ -225,22 +202,18 @@ function addMaxCombinationsToMainGroups(
           modules.push(group.students[i + studentCount].op2);
         }
         groupCount--;
-        // console.log("Student count: ", group.students[i].id);
         if (groupCount === 0) {
           break;
         }
       }
       studentCount += 10;
-      // console.log("Student count: ", studentCount, " - ", groupCount);
       if (groupCount !== 0 && group.count - studentCount <= groupMinCount) {
         for (let j = studentCount; j < group.count; j++) {
-          // console.log(j);
           noGroupStds.push(group.students[j]);
         }
       }
       const uniqueModules = getUniqueElements(modules);
       mainGroups.push({ students: tempGroup, modules: uniqueModules });
-      // console.log("MAIN GROUP: ", mainGroups);
     }
   });
 }
@@ -253,7 +226,6 @@ function addOneOptionToMainGroups(
   noGroupStds
 ) {
   onlyOpGroup.forEach((group) => {
-    // console.log("Group: ", group);
     let groupCount = group.count;
     let studentCount = 0;
     let checked = false;
@@ -274,22 +246,18 @@ function addOneOptionToMainGroups(
           modules.push(group.students[i + studentCount].op2);
         }
         groupCount--;
-        // console.log("Student count: ", group.students[i].id);
         if (groupCount === 0) {
           break;
         }
       }
       studentCount += 10;
-      //   console.log("Student count: ", studentCount, " - ", groupCount);
       if (groupCount !== 0 && group.count - studentCount <= groupMinCount) {
         for (let j = studentCount; j < group.count; j++) {
-          //   console.log(j);
           noGroupStds.push(group.students[j]);
         }
       }
       const uniqueModules = getUniqueElements(modules);
       mainGroups.push({ students: tempGroup, modules: uniqueModules });
-      // console.log("MAIN GROUP: ", mainGroups);
     }
     if (!checked) {
       group.students.forEach((student) => {
@@ -305,8 +273,6 @@ function addMinCombinationsToMainGroups(
   noGroupStds
 ) {
   minCombinations.forEach((group) => {
-    // console.log("Group: ", group);
-    // Iterate through the students in the minGroup
     group.students.forEach((student) => {
       let checked = false;
       // Check if the student has only one option
@@ -314,8 +280,6 @@ function addMinCombinationsToMainGroups(
         (student.op1 === null || student.op2 === null) &&
         (student.op1 !== null || student.op2 !== null)
       ) {
-        // console.log("Student with one option");
-        // console.log(student);
         // Iterate through the mainGroups
         mainGroups.forEach((mainGroup) => {
           checked = true;
@@ -340,8 +304,6 @@ function addMinCombinationsToMainGroups(
           }
         });
       } else {
-        // console.log("Student with two options");
-        // console.log(student);
         const checkedStds = [];
         let count = mainGroups.length;
         mainGroups.forEach((mainGroup) => {
@@ -349,34 +311,10 @@ function addMinCombinationsToMainGroups(
           if (checkedStds.includes(student.id)) {
             return;
           }
-          // console.log(
-          //   "Student: ",
-          //   student,
-          //   mainGroup.modules.includes(student.op1) ||
-          //     mainGroup.modules.includes(student.op2)
-          // );
-          // console.log(
-          //   "Modules: ",
-          //   mainGroup.modules,
-          //   " | Student OP1: ",
-          //   student.op1,
-          //   " | Student OP2: ",
-          //   student.op2
-          // );
-          // console.log("Main Group: ", mainGroup);
-          // console.log("group: ", mainGroup)
-          // console.log("Checked student: ", checkedStds)
-
-          // console.log("Modules: ", mainGroup.modules, " | Student OP1: ", student.op1, " | Student OP2: ", student.op2);
-          // console.log(modules.includes(student.op1) || modules.includes(student.op2));
           if (
             mainGroup.modules.includes(student.op1) ||
             mainGroup.modules.includes(student.op2)
           ) {
-            // console.log("Student True: ", student);
-            // console.log("Not selected: ", student);
-            // console.log("One option is in the mainGroup");
-            // console.log(student);
             if (mainGroup.students.length < groupMaxCount) {
               mainGroup.students.push(student);
               checkedStds.push(student.id);
@@ -387,18 +325,12 @@ function addMinCombinationsToMainGroups(
                 ? null
                 : mainGroup.modules.push(student.op2);
             } else {
-              // console.log("Group is full", student);
               noGroupStds.push(student);
               checkedStds.push(student.id);
-              // console.log("Group: ", mainGroup);
             }
           } else {
-            // console.log("No Options: ", student);
             noGroupStds.push(student);
             checkedStds.push(student.id);
-            // console.log("No option is in the mainGroup");
-            // console.log(student);
-            // noGroupStds.push(student);
           }
           count--;
           if (count === 0) {
@@ -422,19 +354,15 @@ function NoGroupStudents(stdWithNoGroup, mainGroups, groupMaxCount) {
       (student.op1 === null || student.op2 === null) &&
       (student.op1 !== null || student.op2 !== null)
     ) {
-      // console.log("Student with one option");
-      // console.log(student);
       // Iterate through the mainGroups
       const stdAdded = [];
       let groupCount = mainGroups.length;
       mainGroups.forEach((mainGroup) => {
-        // console.log("Student: ", student);
         // Check if the mainGroup's modules array has only one element
         if (mainGroup.students.length >= groupMaxCount) {
           return;
         }
         if (mainGroup.modules.length === 1) {
-          //   console.log("Stauts:", student);
           // Check if the student's option is in the mainGroup's modules array
           mainGroup.modules.includes(student.op1)
             ? mainGroup.students.push(student)
@@ -446,7 +374,6 @@ function NoGroupStudents(stdWithNoGroup, mainGroups, groupMaxCount) {
             ? stdAdded.push(student.id)
             : null;
         } else if (mainGroup.modules.length === 2) {
-          //   console.log("Stauts:", student);
           // Check if the student's options are in the mainGroup's modules array
           mainGroup.modules.includes(student.op1) ||
           mainGroup.modules.includes(student.op2)
@@ -463,8 +390,6 @@ function NoGroupStudents(stdWithNoGroup, mainGroups, groupMaxCount) {
         }
       });
     } else {
-      // console.log("Student with two options");
-      // console.log(student);
       const checkedStds = [];
       const mainGroupAdded = [];
       let count = mainGroups.length;
@@ -475,36 +400,11 @@ function NoGroupStudents(stdWithNoGroup, mainGroups, groupMaxCount) {
         ) {
           return;
         }
-        // console.log(
-        //   "Student: ",
-        //   student,
-        //   mainGroup.modules.includes(student.op1) ||
-        //     mainGroup.modules.includes(student.op2)
-        // );
-        // console.log(
-        //   "Modules: ",
-        //   mainGroup.modules,
-        //   " | Student OP1: ",
-        //   student.op1,
-        //   " | Student OP2: ",
-        //   student.op2
-        // );
-        // console.log("Main Group: ", mainGroup);
-        // console.log("group: ", mainGroup)
-        // console.log("Checked student: ", checkedStds)
-
-        // console.log("Modules: ", mainGroup.modules, " | Student OP1: ", student.op1, " | Student OP2: ", student.op2);
-        // console.log(modules.includes(student.op1) || modules.includes(student.op2));
         if (
           mainGroup.modules.includes(student.op1) ||
           mainGroup.modules.includes(student.op2)
         ) {
-          //   console.log("Student True: ", student);
-          // console.log("Not selected: ", student);
-          // console.log("One option is in the mainGroup");
-          // console.log(student);
           if (mainGroup.students.length < groupMaxCount) {
-            // console.log("Student added: ", student);
             mainGroup.students.push(student);
             mainGroupAdded.push(student.id);
             checkedStds.push(student.id);
@@ -515,33 +415,22 @@ function NoGroupStudents(stdWithNoGroup, mainGroups, groupMaxCount) {
               ? null
               : mainGroup.modules.push(student.op2);
           } else {
-            // console.log("Group is full", student);
-            // console.log(stdWithNoGroup);
             stdWithNoGroup.includes(student)
               ? null
               : stdWithNoGroup.push(student);
-            // checkedStds.push(student.id);
-            // console.log("Group: ", mainGroup);
           }
         } else {
-          // console.log("No Options: ", student);
           stdWithNoGroup.includes(student)
             ? null
             : stdWithNoGroup.push(student);
           checkedStds.push(student.id);
-          // console.log("No option is in the mainGroup");
-          // console.log(student);
-          // stdWithNoGroup.push(student);
-          //   console.log(checkedStds)
         }
         count--;
-        // console.log(checkedStds);
         if (count === 0) {
           if (!checkedStds.includes(student.id)) {
             stdWithNoGroup.push(student);
           }
         }
-        // console.log(stdWithNoGroup);
         // Remove the student from the stdWithNoGroup array that is added to the mainGroup
         stdWithNoGroup = stdWithNoGroup.filter((std) => std.id !== student.id);
       });
@@ -559,12 +448,8 @@ function addNoGroupStdsToFinalGroups(
   let tempGroup = [];
   let modules = [];
 
-  //   console.log("Group Count: ", groupCount);
-  //   console.log("Std Count: ", stdWithNoGroup);
-
   while (groupCount > 0) {
     for (let i = 0; i < groupMaxCount; i++) {
-      // console.log(stdOnlyOneOp[i + stdCount]);
       stdWithNoGroup[i + stdCount].op1 !== null
         ? modules.push(stdWithNoGroup[i + stdCount].op1)
         : null;
@@ -584,7 +469,6 @@ function addNoGroupStdsToFinalGroups(
     tempGroup = [];
     modules = [];
   }
-  //   console.log(stdWithNoGroup);
   return stdWithNoGroup;
 }
 

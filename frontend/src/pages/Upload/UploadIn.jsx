@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import AdvanceFile from "../../components/AdvanceFile";
-import React, { useState } from 'react';
-import './UploadPage.css'; // Import your CSS file for styling
+import React, { useState } from "react";
+import "./UploadPage.css"; // Import your CSS file for styling
 
 const UploadPage = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -31,7 +32,11 @@ const UploadPage = () => {
 
   return (
     <div className="upload-container">
-      <div className="drag-drop-area" onDragOver={handleDragOver} onDrop={handleDrop}>
+      <div
+        className="drag-drop-area"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+      >
         <div className="drag-drop-text">Drag & Drop files here or</div>
         <input type="file" multiple onChange={handleFileChange} />
         <span>Browse</span>
@@ -40,7 +45,11 @@ const UploadPage = () => {
         {selectedFiles.map((file) => (
           <li key={file.name}>
             {fileType(file) ? (
-              <img src={URL.createObjectURL(file)} alt={file.name} className="file-preview" />
+              <img
+                src={URL.createObjectURL(file)}
+                alt={file.name}
+                className="file-preview"
+              />
             ) : (
               <span>{file.name}</span>
             )}

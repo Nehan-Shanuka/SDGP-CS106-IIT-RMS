@@ -45,7 +45,6 @@ export default function MultipleSelectCheckmarks({ onLocationChange }) {
       typeof value === "string" ? value.split(",") : value
     );
   };
-  // console.log(locationName);
 
   useEffect(() => {
     onLocationChange(locationName);

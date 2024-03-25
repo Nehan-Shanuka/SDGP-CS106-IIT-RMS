@@ -1,5 +1,3 @@
-
-
 const Optional_modules =[
     {module_id:"1",
     module_name:"Algorithms: Theory, design and implementation",

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -27,7 +28,7 @@ const Navbar = ({ onSidebarOpen }) => {
       icon: TbReportAnalytics,
     },
     { name: "Group Formation", link: "student-grouping", icon: FiFolder },
-    { name: "Group Details", link: "group-details", icon: TbListDetails },
+    // { name: "Group Details", link: "group-details", icon: TbListDetails },
     { name: "Review Requests", link: "review-requests", icon: RiSettings4Line },
   ];
 
@@ -109,7 +110,7 @@ const Navbar = ({ onSidebarOpen }) => {
             >
               {createElement(menu?.icon, { size: "25" })}
             </div>
-            
+
             {/* Menu Name */}
             <h2
               style={{

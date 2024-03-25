@@ -32,61 +32,13 @@ export default function Groupselect({ degree, onGroupChange }) {
 
   useEffect(() => {
     if (degree[0] === "BSc(Hons) Computer Science") {
-      setGroupArray([
-        "CS-A",
-        "CS-B",
-        "CS-C",
-        "CS-D",
-        "CS-E",
-        "CS-F",
-        "CS-G",
-        "CS-H",
-        "CS-I",
-        "CS-J",
-        "CS-K",
-        "CS-L",
-        "CS-M",
-        "CS-N",
-        "CS-O",
-      ]);
+      setGroupArray(["CS-A", "CS-B", "CS-C", "CS-D", "CS-E"]);
     } else if (degree[0] === "BSc(Hons) Software Engineering") {
-      setGroupArray([
-        "SE-A",
-        "SE-B",
-        "SE-C",
-        "SE-D",
-        "SE-E",
-        "SE-F",
-        "SE-G",
-        "SE-H",
-        "SE-I",
-        "SE-J",
-        "SE-K",
-        "SE-L",
-        "SE-M",
-        "SE-N",
-        "SE-O",
-      ]);
+      setGroupArray(["SE-A", "SE-B", "SE-C", "SE-D", "SE-E"]);
     } else if (
       degree[0] === "BSc(Hons) Artificial Intelligence and Data Science"
     ) {
-      setGroupArray([
-        "AI-A",
-        "AI-B",
-        "AI-C",
-        "AI-D",
-        "AI-E",
-        "AI-F",
-        "AI-G",
-        "AI-H",
-        "AI-I",
-        "AI-J",
-        "AI-K",
-        "AI-L",
-        "AI-M",
-        "AI-N",
-        "AI-O",
-      ]);
+      setGroupArray(["AI-A", "AI-B", "AI-C", "AI-D", "AI-E"]);
     }
     onGroupChange(group);
   }, [degree, onGroupChange, group]);

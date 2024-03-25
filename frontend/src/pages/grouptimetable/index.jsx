@@ -1,15 +1,12 @@
-import { useState } from 'react';
-import BasicSelect from '../../components/BasicSelect.jsx';
-import WeeklyallTimetable from '../../components/WeeklyallTimetable.jsx';
+import { useState } from "react";
+import BasicSelect from "../../components/BasicSelect.jsx";
+import WeeklyallTimetable from "../../components/WeeklyallTimetable.jsx";
 
 function Grouptimetable() {
+  const values = ["CS-A", "CS-B", "CS-C", "CS-D", "CS-E"];
+  const labels = ["CS-A", "CS-B", "CS-C", "CS-D", "CS-E"];
 
-
-  
-  const values = ["CS-A", "CS-B", "CS-C", "CS-D", "CS-E", "CS-F", "CS-G", "CS-H", "CS-I", "CS-J", "CS-K", "CS-L", "CS-M", "CS-N", "CS-O"];
-  const labels = ["CS-A", "CS-B", "CS-C", "CS-D", "CS-E", "CS-F", "CS-G", "CS-H", "CS-I", "CS-J", "CS-K", "CS-L", "CS-M", "CS-N", "CS-O"];
-
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState("");
 
   const handleSelectChange = (value) => {
     setSelectedValue(value);
@@ -17,8 +14,12 @@ function Grouptimetable() {
 
   return (
     <div>
-      <div className='pl-16'>
-      <BasicSelect values={values} labels={labels} onSelect={handleSelectChange} />
+      <div className="pl-16">
+        <BasicSelect
+          values={values}
+          labels={labels}
+          onSelect={handleSelectChange}
+        />
       </div>
       <WeeklyallTimetable selectedValue={selectedValue} />
     </div>

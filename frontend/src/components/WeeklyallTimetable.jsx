@@ -31,7 +31,6 @@ const WeeklyallTimetable = ({ selectedValue }) => {
         const response = await axios.get(
           "https://sdgp-cs106-iit-rms.onrender.com/timetables"
         );
-        console.log("Response data:", response.data);
         setTimetableData(response.data);
         setLoading(false);
         // Show the loader for 2 seconds

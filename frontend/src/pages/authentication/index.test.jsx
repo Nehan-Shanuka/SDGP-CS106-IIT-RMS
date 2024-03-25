@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable no-undef */
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Authenticator from './Authenticator'; 

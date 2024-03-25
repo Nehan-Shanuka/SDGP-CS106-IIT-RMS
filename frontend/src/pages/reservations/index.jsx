@@ -44,8 +44,6 @@ export default function Reservation({ isSidebarOpen, user }) {
       });
   }, []);
 
-  console.log(user);
-
   // Function to handle location (building) change
   const handleLocationChange = (locationName) => {
     setBuildingID(locationName);

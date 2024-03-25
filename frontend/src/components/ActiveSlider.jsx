@@ -1,11 +1,10 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/free-mode';
-import { FreeMode, Pagination } from 'swiper/modules';
-import { RxArrowTopRight } from 'react-icons/rx';
-import { ServiceData } from '../constants/index.js';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/free-mode";
+import { FreeMode, Pagination } from "swiper/modules";
+import { RxArrowTopRight } from "react-icons/rx";
+import { ServiceData } from "../constants/index.js";
 
 const ActiveSlider = () => {
   return (
@@ -39,7 +38,7 @@ const ActiveSlider = () => {
                 <item.icon className="text-blue-600 group-hover:text-blue-400 w-[32px] h-[32px]" />
                 <h1 className="text-xl lg:text-2xl">{item.title}</h1>
                 <p className="lg:text-[18px]">{item.content}</p>
-                <p className='lg:text-[18px]'>Students - {item.number}</p>
+                <p className="lg:text-[18px]">Students - {item.number}</p>
               </div>
               <RxArrowTopRight className="absolute bottom-5 left-5 w-[35px] h-[35px] text-white group-hover:text-blue-500 group-hover:rotate-45 duration-100" />
             </div>

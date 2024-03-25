@@ -25,11 +25,13 @@ export default function InputFileUpload() {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState("");
 
+  // Handle file change event
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
   };
 
+  // Format the data to match the server schema
   const formatData = (jsonData) => {
     const formattedData = jsonData.map((entry) => ({
       id: entry.id,
@@ -42,6 +44,7 @@ export default function InputFileUpload() {
     return formattedData;
   };
 
+  // Handle upload button click event
   const handleUpload = () => {
     if (!file) {
       setSnackbarMessage("No file selected");
@@ -49,8 +52,10 @@ export default function InputFileUpload() {
       return; // Exit the function if no file is selected
     }
 
+    // Read the file
     const reader = new FileReader();
 
+    // Handle the file read event
     reader.onload = () => {
       try {
         const arrayBuffer = reader.result;
@@ -59,8 +64,6 @@ export default function InputFileUpload() {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-        console.log("Converted JSON data:", jsonData);
 
         const formattedData = formatData(jsonData);
 
@@ -82,33 +85,6 @@ export default function InputFileUpload() {
               setOpenSnackbar(true);
             });
         });
-
-        // fetch('https://sdgp-cs106-iit-rms.onrender.com/students', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(formattedData)
-
-        // })
-        // console.log(formattedData)
-
-        // .then(response => {
-        //   if (!response.ok) {
-        //     throw new Error('Failed to post data to the server');
-        //   }
-        //   return response.json();
-        // })
-        // .then(data => {
-        //   console.log('Data posted successfully:', data);
-        //   setSnackbarMessage('File uploaded and data posted to server successfully.');
-        //   setOpenSnackbar(true);
-        // })
-        // .catch(error => {
-        //   console.error('Error posting data to server:', error);
-        //   setSnackbarMessage('Error posting data to server: ' + error.message);
-        //   setOpenSnackbar(true);
-        // });
       } catch (error) {
         console.error("Error converting file to JSON:", error);
         setSnackbarMessage("Error converting file to JSON: " + error.message);
@@ -117,12 +93,14 @@ export default function InputFileUpload() {
       }
     };
 
+    // Read the file as an array buffer
     reader.readAsArrayBuffer(file);
 
     // Reset the file state after upload if needed
     setFile(null);
   };
 
+  // Handle cancel button click event
   const handleCancel = () => {
     // Clear the selected file
     setFile(null);
@@ -130,19 +108,10 @@ export default function InputFileUpload() {
     setOpenSnackbar(true);
   };
 
+  // Handle close snackbar event
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
-
-  // useEffect(() => {
-  //   axios.post('https://sdgp-cs106-iit-rms.onrender.com/students')
-  //   .then(response => {
-  //     console.log(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching data:', error);
-  //   });
-  // }, []);
 
   return (
     <Box

@@ -32,7 +32,6 @@ export default function InputFileUpload() {
 
   const handleDegreePath = (value) => {
     setDegree(value);
-    console.log(degree);
   };
 
   const handleFileChange = (event) => {
@@ -52,17 +51,11 @@ export default function InputFileUpload() {
     reader.onload = () => {
       try {
         const arrayBuffer = reader.result;
-        console.log("Array buffer:", arrayBuffer);
         const data = new Uint8Array(arrayBuffer);
-        console.log("Data:", data);
         const workbook = XLSX.read(data, { type: "array" });
-        console.log("Workbook:", workbook);
         const sheetName = workbook.SheetNames[0];
-        console.log("Sheet name:", sheetName);
         const worksheet = workbook.Sheets[sheetName];
-        console.log("Worksheet:", worksheet);
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        console.log("JSON data:", jsonData);
 
         // Restructure jsonData into the desired format
         const formattedData = {
@@ -87,8 +80,6 @@ export default function InputFileUpload() {
             acc[day] = {};
           }
 
-          // console.log("Acc:", acc[day][sessionKey]);
-
           buildingID === undefined
             ? (acc[day][sessionKey] = null)
             : (acc[day][sessionKey] = {
@@ -99,10 +90,6 @@ export default function InputFileUpload() {
                 lecturer,
               });
 
-          // if (acc[buildingID] === null) {
-          //   acc[day][sessionKey] = null;
-          // }
-
           return acc;
         }, {});
 
@@ -110,8 +97,6 @@ export default function InputFileUpload() {
         Object.entries(groupedSessions).forEach(([day, sessions]) => {
           formattedData.sessions.push({ day, timeSessions: sessions });
         });
-
-        console.log("Formatted data:", formattedData);
 
         axios
           .post(
@@ -159,7 +144,6 @@ export default function InputFileUpload() {
 
   const handleGroupPath = (value) => {
     setGroup(value);
-    // console.log(group);
   };
 
   return (

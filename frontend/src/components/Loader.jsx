@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/DotLoader";
-import Welcome from './Welcome';
+import Welcome from "./Welcome";
 
+// Loader component for displaying a loading spinner
 function Loader() {
   const [loading, setloading] = useState(false);
 
@@ -20,7 +21,14 @@ function Loader() {
   `;
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
       {loading ? (
         <ClipLoader
           color={"#DC143C"}
@@ -30,7 +38,7 @@ function Loader() {
           loading={loading}
         />
       ) : (
-        <Welcome/>
+        <Welcome />
       )}
     </div>
   );

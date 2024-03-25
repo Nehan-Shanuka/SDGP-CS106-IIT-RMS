@@ -116,12 +116,7 @@ export default function ExpandableReviewReservation() {
           },
         }}
       >
-        <div
-          className="grid gap-3 xs:grid-cols-1 md:grid-cols-2"
-          // style={{
-          //   gridColumn: {xs: "auto", md: "col-2"},
-          // }}
-        >
+        <div className="grid gap-3 xs:grid-cols-1 md:grid-cols-2">
           {reservations.map((reservation, index) => {
             return (
               <Box
@@ -139,7 +134,6 @@ export default function ExpandableReviewReservation() {
                         padding: 2,
                         justifyContent: "space-between",
                         height: "auto",
-                        // maxWidth: "511.8px",
                       }
                     : {}),
                 }}

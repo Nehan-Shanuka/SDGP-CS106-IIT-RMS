@@ -35,7 +35,6 @@ const NestedGrid = ({ user }) => {
         const response = await axios.get(
           "https://sdgp-cs106-iit-rms.onrender.com/timetables"
         );
-        console.log("Response data:", response.data);
         setTimetableData(response.data);
         setLoading(true); // Set loading to true to display loading indicator
         setTimeout(() => {
@@ -80,8 +79,6 @@ const NestedGrid = ({ user }) => {
       </Box>
     );
   }
-
-  console.log("user", user);
 
   return (
     <div className="flex flex-col">

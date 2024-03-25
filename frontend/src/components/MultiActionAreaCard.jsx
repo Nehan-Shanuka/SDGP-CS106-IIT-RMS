@@ -1,15 +1,14 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import { Link } from 'react-router-dom';
+/* eslint-disable react/prop-types */
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Link } from "react-router-dom";
 
-
-export default function MultiActionAreaCard({type,img,path,texts}) {
+export default function MultiActionAreaCard({ type, img, path, texts }) {
   return (
-    <Card >
+    <Card>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -27,14 +26,12 @@ export default function MultiActionAreaCard({type,img,path,texts}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Link to={path} style={{ textDecoration: 'none' }}>
-        <Button size="small" color="primary">
-          Click Here
-
-        </Button>
+        <Link to={path} style={{ textDecoration: "none" }}>
+          <Button size="small" color="primary">
+            Click Here
+          </Button>
         </Link>
       </CardActions>
-
     </Card>
   );
 }
