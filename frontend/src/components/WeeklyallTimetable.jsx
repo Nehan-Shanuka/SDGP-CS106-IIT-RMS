@@ -8,8 +8,6 @@ import Typography from "@mui/material/Typography";
 // import RedirectButton from "../RedirectButto";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
-import Lottie from "lottie-react";
-import Loading from "../assets/loading.json"
 
 // Styled component for individual timetable item
 const Item = styled("div")(({ theme, color }) => ({
@@ -35,9 +33,8 @@ const WeeklyallTimetable = ({ selectedValue }) => {
       try {
         const response = await axios.get("http://localhost:5555/timetables");
         console.log("Response data:", response.data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setTimetableData(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching timetable data:", error);
         setError(error.message);
@@ -45,19 +42,13 @@ const WeeklyallTimetable = ({ selectedValue }) => {
       }
     };
 
-
     fetchData();
   }, []);
 
   // Display loading message while fetching data
   if (loading) {
-    return (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-        <Lottie animationData={Loading} />
-      </div>
-    );
+    return <p>Loading...</p>;
   }
-  
 
   if (error) {
     return <p>Error: {error}</p>;
