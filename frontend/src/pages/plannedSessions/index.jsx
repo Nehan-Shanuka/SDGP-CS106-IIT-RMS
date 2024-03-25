@@ -29,7 +29,7 @@ export default function PlannedSessions({ isSidebarOpen }) {
   };
 
   useEffect(() => {
-    const url = `http://localhost:5555/reservations?confirmation=${confirmation}&subject=${moduleName}&buildingID=${buildingID}&type=${type}`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/reservations?confirmation=${confirmation}&subject=${moduleName}&buildingID=${buildingID}&type=${type}`;
     axios
       .get(url)
       .then((response) => {
@@ -41,7 +41,7 @@ export default function PlannedSessions({ isSidebarOpen }) {
   }, [confirmation, moduleName, buildingID, type, day, selectedDate]);
 
   useEffect(() => {
-    const url = `http://localhost:5555/halls?buildingID=${buildingID}`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/halls?buildingID=${buildingID}`;
     axios
       .get(url)
       .then((response) => {
@@ -54,7 +54,7 @@ export default function PlannedSessions({ isSidebarOpen }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5555/buildings")
+      .get("https://sdgp-cs106-iit-rms.onrender.com/buildings")
       .then((response) => {
         setBuildings(response.data);
       })
@@ -86,10 +86,10 @@ export default function PlannedSessions({ isSidebarOpen }) {
       setIsVisible(window.innerWidth >= 768); // Adjust the width threshold as needed
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize(); // Initial check
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   console.log("Hi", selectedDate);
@@ -103,7 +103,7 @@ export default function PlannedSessions({ isSidebarOpen }) {
             justifyContent: "space-between",
             flexDirection: { xs: "column", md: "row" },
             // paddingX: isSidebarOpen ? 10 : 15,
-            paddingX: { xs: 5, md: 10},
+            paddingX: { xs: 5, md: 10 },
             paddingY: 3,
             height: "90vh",
             width: "100%",
@@ -111,28 +111,29 @@ export default function PlannedSessions({ isSidebarOpen }) {
         >
           <div
             style={{
-              display: { xs: "flex", md: "none"},
-              flexDirection: { xs: "row", md: "column"},
+              display: { xs: "flex", md: "none" },
+              flexDirection: { xs: "row", md: "column" },
               justifyContent: { xs: "space-between", md: "none" },
               gap: 2,
               // width: "100%",
             }}
           >
             <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "",
-            }}
-          >
-            <div><Calender
-              onDateChange={handleDateChange}
-              onDayChange={handleDayChange}
-            /></div>
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "",
+              }}
+            >
+              <div>
+                <Calender
+                  onDateChange={handleDateChange}
+                  onDayChange={handleDayChange}
+                />
+              </div>
             </div>
-            
-            <div style={{ display: isVisible ? 'block' : 'none' }}>
-              
+
+            <div style={{ display: isVisible ? "block" : "none" }}>
               <Location onLocationChange={handleLocationChange} />
               <Module onModuleChange={handleModuleChange} />
               <Type onTypeChange={handleTypeChange} />

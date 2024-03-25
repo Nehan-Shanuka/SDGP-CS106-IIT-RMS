@@ -15,11 +15,11 @@ const studentSchema = new mongoose.Schema({
     },
     op1: {
         type: String,
-        required: true,
+        // required: true,
     },
     op2: {
         type: String,
-        required: true,
+        // required: true,
     },
     group: {
         type: String,

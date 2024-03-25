@@ -21,7 +21,7 @@ export default function Reservation({ isSidebarOpen, user }) {
 
   // Fetch hall data based on selected building ID
   useEffect(() => {
-    const url = `http://localhost:5555/halls?buildingID=${buildingID}`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/halls?buildingID=${buildingID}`;
     axios
       .get(url)
       .then((response) => {
@@ -35,7 +35,7 @@ export default function Reservation({ isSidebarOpen, user }) {
   // Fetch building data on component mount
   useEffect(() => {
     axios
-      .get("http://localhost:5555/buildings")
+      .get("https://sdgp-cs106-iit-rms.onrender.com/buildings")
       .then((response) => {
         setBuildings(response.data);
       })
