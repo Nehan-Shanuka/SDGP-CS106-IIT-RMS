@@ -40,14 +40,31 @@ export default function Authenticator({ userOnBoard }) {
 
   return (
     <>
-      <div className="w-full bg-stone-200"></div>
+      {/* <div className="w-full bg-stone-200"></div> */}
+      <div className="bg-white w-full h-[50vh]"></div>
+      <div className="bg-[#D9D9D9] w-full h-[50vh]"></div>
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "80%",
+          height: "80vh",
+          // backgroundColor: "#FFFFFF",
+          borderRadius: "20px",
+          display: "flex",
+          justifyContent: "center",
+          // opacity: "0.8",
+        }}
+      >
       
       <div className=''>
         <motion.section
           initial={{ y: 500 }}
           animate={{ y: 0 }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className='bg-gray-300 pt-[370px] mt-[300px]'
+          className='pt-[370px] mt-[230px]'
         >
           <motion.div
             initial={{ opacity: 0 }}
@@ -55,7 +72,7 @@ export default function Authenticator({ userOnBoard }) {
             transition={{ duration: 2, delay: 0.8 }}
             className=' mt-[-590px] relative '
           >
-            <div className="flex w-[60%] max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-[#3e697a] lg:max-w-4xl">
+            <div className="flex w-[100%] max-w-sm mx-auto overflow-hidden bg-white rounded-xl shadow-lg dark:bg-[#3e697a] lg:max-w-4xl">
               <div className="hidden w-[40%] bg-cover lg:block mt-[15%] ml-10 ">
                 <Lottie animationData={animation} />
               </div>
@@ -81,12 +98,12 @@ export default function Authenticator({ userOnBoard }) {
               textAlign: "center",
               display: "block",
               ":hover": {
-                backgroundColor: "#1C1C1F",
+                backgroundColor: "#ffffff",
               },
             }}
             onClick={handleAuthenticatorClick}
           >
-            <div className="flex font-medium">
+            <div className="flex font-medium hover:text-black">
               <p>LOGIN WITH GOOGLE</p>
             </div>
           </Button>
@@ -131,6 +148,7 @@ export default function Authenticator({ userOnBoard }) {
             </div>
           </motion.div>
         </motion.section>
+      </div>
       </div>
     </>
   );

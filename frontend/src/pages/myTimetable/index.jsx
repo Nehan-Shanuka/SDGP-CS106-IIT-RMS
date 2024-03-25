@@ -176,7 +176,7 @@ export default function MyTimetable() {
   };
 
   useEffect(() => {
-    const url = `http://localhost:5555/timetables`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/timetables`;
     axios
       .get(url)
       .then((response) => {
@@ -303,7 +303,6 @@ export default function MyTimetable() {
               padding: 2,
               justifyContent: "space-between",
               width: { xs: "100%", md: "23rem" },
-
             }}
           >
             <div className="flex justify-between items-center">
@@ -375,8 +374,7 @@ export default function MyTimetable() {
             alignItems: "",
           }}
         >
-          <div
-          >
+          <div>
             <Calender
               onDateChange={handleDateChange}
               onDayChange={handleDayChange}
@@ -384,9 +382,11 @@ export default function MyTimetable() {
           </div>
         </div>
 
-        <div style={{
-          marginTop: {xs: 10, md: 10},
-        }}>
+        <div
+          style={{
+            marginTop: { xs: 10, md: 10 },
+          }}
+        >
           <div>
             <Card
               sx={{
@@ -399,7 +399,7 @@ export default function MyTimetable() {
                 borderRadius: 5,
                 overflowY: "auto",
                 scrollBehavior: "smooth",
-                marginTop: {xs: 2, sm: 2, md: 0}, 
+                marginTop: { xs: 2, sm: 2, md: 0 },
                 height: { xs: "34vh", md: null },
                 "&::-webkit-scrollbar": {
                   display: "none",

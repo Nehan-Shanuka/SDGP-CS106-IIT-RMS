@@ -28,7 +28,9 @@ const WeeklyallTimetable = ({ selectedValue }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/timetables");
+        const response = await axios.get(
+          "https://sdgp-cs106-iit-rms.onrender.com/timetables"
+        );
         console.log("Response data:", response.data);
         setTimetableData(response.data);
         setLoading(false);
@@ -63,6 +65,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
   return (
     <div className="flex flex-col">
       <div className="grid justify-items-end"></div>
+      {/* Container for displaying the weekly timetable */}
       <Box
         sx={{
           flexGrow: 1,
@@ -183,6 +186,7 @@ const WeeklyallTimetable = ({ selectedValue }) => {
                                           </div>
                                         </div>
                                         <div className="text-base my-2">
+                                          {/* Apply font size for the subject */}
                                           {session.timeSessions[timeKey]
                                             ?.subject ===
                                           "Object Oriented Programming"

@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ color }) => ({
   borderRadius: 15,
 }));
 
-export default function AvailableHallList({ color, halls, buildings, dateSelected, day, isSidebarOpen }) {
+export default function AvailableHallList({ color, halls, buildings, dateSelected, day, isSidebarOpen, user }) {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [registationForm, setRegistationForm] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -27,6 +27,8 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
   const handleChangedRegistationForm = (changedRegistationForm) => {
     setRegistationForm(changedRegistationForm);
   };
+
+  console.log(user)
 
   return (
     <Card
@@ -185,6 +187,7 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
                 buildings={buildings}
                 dateSelected={dateSelected}
                 dayFromCalender={day}
+                user={user}
               />
             </div>
           )}

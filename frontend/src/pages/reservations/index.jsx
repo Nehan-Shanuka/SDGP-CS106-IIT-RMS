@@ -7,7 +7,7 @@ import Location from "../../components/LocationSelection";
 import AvailableHallList from "../../components/AvailableHallList";
 import axios from "axios";
 
-export default function Reservation({ isSidebarOpen }) {
+export default function Reservation({ isSidebarOpen, user }) {
   const [halls, setHalls] = useState([]);
   const [buildings, setBuildings] = useState([]);
   const [buildingID, setBuildingID] = useState([]);
@@ -21,7 +21,7 @@ export default function Reservation({ isSidebarOpen }) {
 
   // Fetch hall data based on selected building ID
   useEffect(() => {
-    const url = `http://localhost:5555/halls?buildingID=${buildingID}`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/halls?buildingID=${buildingID}`;
     axios
       .get(url)
       .then((response) => {
@@ -35,7 +35,7 @@ export default function Reservation({ isSidebarOpen }) {
   // Fetch building data on component mount
   useEffect(() => {
     axios
-      .get("http://localhost:5555/buildings")
+      .get("https://sdgp-cs106-iit-rms.onrender.com/buildings")
       .then((response) => {
         setBuildings(response.data);
       })
@@ -43,6 +43,8 @@ export default function Reservation({ isSidebarOpen }) {
         console.log(error);
       });
   }, []);
+
+  console.log(user);
 
   // Function to handle location (building) change
   const handleLocationChange = (locationName) => {
@@ -91,6 +93,7 @@ export default function Reservation({ isSidebarOpen }) {
             buildings={buildings}
             dateSelected={selectedDate}
             day={day}
+            user={user}
           />
         </Card>
       </section>

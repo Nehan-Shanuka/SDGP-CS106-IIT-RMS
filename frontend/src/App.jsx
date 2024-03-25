@@ -22,9 +22,9 @@ import UnderManintainCall from "./components/underDevelopMSG";
 import TimetableUpload from "./pages/Upload/TimetableUP";
 import UsersUploads from "./pages/Upload/UsersUp";
 import StudentUploads from "./pages/Upload/studentUP";
+import StdGrouping from "./pages/studentGrouping";
 
 export default function App() {
-
   // State management
   const [isSidebar, setIsSidebar] = useState(false);
   const [isWelcome, setIsWelcome] = useState(true);
@@ -34,12 +34,13 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-
   // Fetch users on component mount
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/users");
+        const response = await axios.get(
+          "https://sdgp-cs106-iit-rms.onrender.com/users"
+        );
         if (response.status === 200) {
           setUsers(response.data);
         }
@@ -52,13 +53,11 @@ export default function App() {
 
   // Simulate loading delay
   useEffect(() => {
-
     // Simulate loading time
     setTimeout(() => {
       setLoading(false);
     }, 3000); // Adjust the timeout value as needed
   }, []);
-
 
   // Handlers for various state updates
   const handleStateChange = (state) => {
@@ -84,6 +83,7 @@ export default function App() {
     setIsAuthenticated(false);
   };
 
+  console.log("in app ", userFromDB);
   // console.log("in app ", isAuthenticated);
   // console.log("in app", onBoardUser);
 
@@ -111,16 +111,15 @@ export default function App() {
                 <Route path="/my-timetable" element={<MyTimetable />} />
                 <Route
                   path="/reservations"
-                  element={<Reservation isSidebarOpen={isSidebar} />}
+                  element={
+                    <Reservation isSidebarOpen={isSidebar} user={userFromDB} />
+                  }
                 />
                 <Route
                   path="/planned-sessions"
                   element={<PlannedSessions isSidebarOpen={isSidebar} />}
                 />
-                <Route
-                  path="/student-grouping"
-                  element={<UnderManintainCall />}
-                />
+                <Route path="/student-grouping" element={<StdGrouping />} />
                 <Route path="/group-details" element={<UnderManintainCall />} />
                 {userFromDB.adminPrivilege ? (
                   <Route

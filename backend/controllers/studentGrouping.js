@@ -308,7 +308,7 @@ function addMinCombinationsToMainGroups(
     // console.log("Group: ", group);
     // Iterate through the students in the minGroup
     group.students.forEach((student) => {
-      const checked = false;
+      let checked = false;
       // Check if the student has only one option
       if (
         (student.op1 === null || student.op2 === null) &&

@@ -89,14 +89,15 @@ export default function InputFileUpload() {
 
           // console.log("Acc:", acc[day][sessionKey]);
 
-          buildingID === undefined ? (acc[day][sessionKey] = null) : (acc[day][sessionKey] = {
-            buildingID,
-            hallID,
-            type,
-            subject,
-            lecturer,
-          });
-          
+          buildingID === undefined
+            ? (acc[day][sessionKey] = null)
+            : (acc[day][sessionKey] = {
+                buildingID,
+                hallID,
+                type,
+                subject,
+                lecturer,
+              });
 
           // if (acc[buildingID] === null) {
           //   acc[day][sessionKey] = null;
@@ -112,16 +113,23 @@ export default function InputFileUpload() {
 
         console.log("Formatted data:", formattedData);
 
-        
-          axios.post('http://localhost:5555/timetables', formattedData)
-          .then(response => {
-            console.log('Data posted successfully:', response.data);
-            setSnackbarMessage('File uploaded and data posted to server successfully.');
+        axios
+          .post(
+            "https://sdgp-cs106-iit-rms.onrender.com/timetables",
+            formattedData
+          )
+          .then((response) => {
+            console.log("Data posted successfully:", response.data);
+            setSnackbarMessage(
+              "File uploaded and data posted to server successfully."
+            );
             setOpenSnackbar(true);
           })
-          .catch(error => {
-            console.error('Error posting data to server:', error);
-            setSnackbarMessage('Error posting data to server: ' + error.message);
+          .catch((error) => {
+            console.error("Error posting data to server:", error);
+            setSnackbarMessage(
+              "Error posting data to server: " + error.message
+            );
             setOpenSnackbar(true);
           });
 
@@ -168,17 +176,17 @@ export default function InputFileUpload() {
       {group !== undefined && degree !== undefined ? (
         <div className="flex flex-col my-5">
           <label htmlFor="file-upload">
-          <Button
-            component="span"
-            role={undefined}
-            variant="contained"
-            color="success" // Change color to green
-            tabIndex={-1}
-            startIcon={<CloudUploadIcon />}
-            sx={{ marginBottom: 1 }}
-          >
-            Upload file
-          </Button>
+            <Button
+              component="span"
+              role={undefined}
+              variant="contained"
+              color="success" // Change color to green
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+              sx={{ marginBottom: 1 }}
+            >
+              Upload file
+            </Button>
           </label>
           <VisuallyHiddenInput
             id="file-upload"

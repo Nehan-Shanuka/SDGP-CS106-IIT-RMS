@@ -12,7 +12,7 @@ export default function ExpandableReviewReservation() {
   const [buildingID, setBuildingID] = useState([]);
 
   useEffect(() => {
-    const url = `http://localhost:5555/reservations?confirmation=${confirmation}`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/reservations?confirmation=${confirmation}`;
     axios
       .get(url)
       .then((response) => {
@@ -24,7 +24,7 @@ export default function ExpandableReviewReservation() {
   }, [confirmation]);
 
   useEffect(() => {
-    const url = `http://localhost:5555/halls?buildingID=${buildingID}`;
+    const url = `https://sdgp-cs106-iit-rms.onrender.com/halls?buildingID=${buildingID}`;
     axios
       .get(url)
       .then((response) => {
@@ -37,7 +37,7 @@ export default function ExpandableReviewReservation() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5555/buildings")
+      .get("https://sdgp-cs106-iit-rms.onrender.com/buildings")
       .then((response) => {
         setBuildings(response.data);
       })
@@ -48,11 +48,13 @@ export default function ExpandableReviewReservation() {
 
   const handleConfirmReservation = (id) => {
     axios
-      .put(`http://localhost:5555/reservations/${id}`, { confirmation: true })
+      .put(`https://sdgp-cs106-iit-rms.onrender.com/reservations/${id}`, {
+        confirmation: true,
+      })
       .then((response) => {
         axios
           .get(
-            `http://localhost:5555/reservations?confirmation=${confirmation}`
+            `https://sdgp-cs106-iit-rms.onrender.com/reservations?confirmation=${confirmation}`
           )
           .then((response) => {
             setReservations(response.data);
@@ -71,11 +73,11 @@ export default function ExpandableReviewReservation() {
 
   const handleDropReservation = (id) => {
     axios
-      .delete(`http://localhost:5555/reservations/${id}`)
+      .delete(`https://sdgp-cs106-iit-rms.onrender.com/reservations/${id}`)
       .then((response) => {
         axios
           .get(
-            `http://localhost:5555/reservations?confirmation=${confirmation}`
+            `https://sdgp-cs106-iit-rms.onrender.com/reservations?confirmation=${confirmation}`
           )
           .then((response) => {
             setReservations(response.data);
@@ -92,7 +94,7 @@ export default function ExpandableReviewReservation() {
   return (
     <Card
       sx={{
-        paddingX: {xs: "auto", md: 3},
+        paddingX: { xs: "auto", md: 3 },
         paddingTop: 1,
         paddingBottom: 3,
         height: "90vh",
@@ -114,10 +116,11 @@ export default function ExpandableReviewReservation() {
           },
         }}
       >
-        <div className="grid gap-3 xs:grid-cols-1 md:grid-cols-2" 
-        // style={{
-        //   gridColumn: {xs: "auto", md: "col-2"},
-        // }}
+        <div
+          className="grid gap-3 xs:grid-cols-1 md:grid-cols-2"
+          // style={{
+          //   gridColumn: {xs: "auto", md: "col-2"},
+          // }}
         >
           {reservations.map((reservation, index) => {
             return (

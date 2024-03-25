@@ -1,69 +1,19 @@
+/* eslint-disable no-unused-vars */
 import { Button, Card } from "@mui/material";
-import Calender from "../../components/Calender";
-import HallList from "../../components/HallList";
-import Time from "../../components/TimeSlection";
-import Location from "../../components/LocationSelection";
-import Degree from "../../components/DegreeSelection";
-import Level from "../../components/LevelSelection";
-import Module from "../../components/ModuleSelection";
-import Type from "../../components/TypeSelection";
-import Group from "../../components/GroupSelection";
-
-// Sample courses data 
-const courses = [
-  {
-    hallNumber: "AUD",
-    building: "GP",
-    moduleName: "Object Oriented Programming",
-    time: "08.30-10.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Lecture",
-  },
-  {
-    hallNumber: "1LB",
-    building: "JB",
-    moduleName: "Object Oriented Programming",
-    time: "08.30-10.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Lecture",
-  },
-  {
-    hallNumber: "5LB",
-    building: "GP",
-    moduleName: "Object Oriented Programming",
-    time: "08.30-10.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Lecture",
-  },
-  {
-    hallNumber: "4LC",
-    building: "JB",
-    moduleName: "Object Oriented Programming",
-    time: "08.30-10.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Lecture",
-  },
-  {
-    hallNumber: "7LB",
-    building: "SP",
-    moduleName: "Object Oriented Programming",
-    time: "08.30-10.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Lecture",
-  },
-];
+import axios from "axios";
 
 export default function StdGrouping() {
+  const createGroup = async () => {
+    try {
+      const response = await axios.post(
+        "https://sdgp-cs106-iit-rms.onrender.com/groups"
+      );
+      // console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <section className="flex gap-0 bg-gray-200">
@@ -76,17 +26,6 @@ export default function StdGrouping() {
           }}
         >
           <div>
-            <Calender />
-          </div>
-
-          <div>
-            <Time />
-            <Location />
-            <Degree />
-            <Level />
-            <Module />
-            <Type />
-            <Group />
             <Button
               variant="contained"
               color="primary"
@@ -101,16 +40,11 @@ export default function StdGrouping() {
                   color: "#fff",
                 },
               }}
+              onClick={createGroup}
             >
-              Search 
+              Search
             </Button>
           </div>
-
-          <HallList
-            color={"#3E737A"}
-            status={"strGouping"}
-            newcourses={courses}
-          />
         </Card>
       </section>
     </>
