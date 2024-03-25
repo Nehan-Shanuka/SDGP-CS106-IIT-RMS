@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -9,6 +7,8 @@ import styled from "@mui/material/styles/styled";
 import { Button } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import RequestForm from "./requestForm";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const Item = styled(Paper)(({ color }) => ({
   backgroundColor: color,
@@ -22,6 +22,7 @@ const Item = styled(Paper)(({ color }) => ({
 export default function AvailableHallList({ color, halls, buildings, dateSelected, day, isSidebarOpen, user }) {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [registationForm, setRegistationForm] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChangedRegistationForm = (changedRegistationForm) => {
     setRegistationForm(changedRegistationForm);
@@ -32,13 +33,12 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
   return (
     <Card
       sx={{
-        // width: isSidebarOpen ? "55%" : "50%",
-        width: {xs: "100%", sm: "100%", md: "55%"}, // Added this line
+        width: {xs: "100%", sm: "100%", md: "55%"},
         backgroundColor: "#D9D9D9",
         borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: {xs: 3, sm: 3, md: 0}, // Added this line
+        marginTop: {xs: 3, sm: 3, md: 0},
       }}
     >
       <CardContent>
@@ -52,7 +52,7 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
             scrollBehavior: "smooth",
             height: "79.5vh",
             "&::-webkit-scrollbar": {
-              display: "none", // Hide scrollbar for Chrome
+              display: "none",
             },
           }}
         >
@@ -60,10 +60,9 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
             halls.map((hall, index) => (
               <Item
                 sx={{
-                  height: hoveredItem === index ? "200px" : "115px", // Enlarged height when hovered
-                  width: hoveredItem === index ? "100%" : "97%", // Enlarged width when hovered
-
-                  transition: "height 0.5s ease-in-out", // Smooth transition effect
+                  height: hoveredItem === index ? "200px" : "115px",
+                  width: hoveredItem === index ? "100%" : "97%",
+                  transition: "height 0.5s ease-in-out",
                   display: "flex",
                   flexWrap: "wrap",
                   gap: 0,
@@ -119,7 +118,6 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
                     visibility: hoveredItem === index ? "visible" : "hidden",
                     height: hoveredItem === index ? "auto" : "0",
                     transition: "height 1.5s ease-in-out",
-
                     paddingBottom: hoveredItem === index ? "10px" : "0",
                   }}
                 >
@@ -179,9 +177,9 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
               </Item>
             ))
           ) : dateSelected === null || dateSelected === undefined ? (
-            (alert("Please select a date"), handleChangedRegistationForm(false))
+            setSnackbarOpen(true),
+            handleChangedRegistationForm(false)
           ) : (
-            // (console.log("Date Selected", dateSelected)),
             <div className="w-full h-full">
               <RequestForm
                 onRegistationFormChange={handleChangedRegistationForm}
@@ -194,6 +192,22 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
             </div>
           )}
         </Box>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={() => setSnackbarOpen(false)}
+          className="ml-[-1.5%]  "
+
+        >
+          <MuiAlert
+            onClose={() => setSnackbarOpen(false)}
+            severity="warning"
+            style={{ backgroundColor: "#AE1A1A", color: "#FFFFFF"}}
+
+          >
+            Please select a date
+          </MuiAlert>
+        </Snackbar>
       </CardContent>
     </Card>
   );
