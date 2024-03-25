@@ -70,7 +70,8 @@ export default function HallList({ color, status, newcourses }) {
               onMouseLeave={() => setHoveredItem(null)}
               color={color}
             >
-              <div className="flex justify-between items-center"
+              <div
+                className="flex justify-between items-center"
                 style={{
                   width: hoveredItem === index ? "95%" : "100%",
                   paddingTop: hoveredItem === index ? "0" : "0",
@@ -78,16 +79,12 @@ export default function HallList({ color, status, newcourses }) {
                 }}
               >
                 <div className="w-1/4">
-                  <p className="pl-5 text-5xl">
-                    {course.hallNumber}
-                  </p>
+                  <p className="pl-5 text-5xl">{course.hallNumber}</p>
                 </div>
 
                 <div>
                   <div>
-                    <p className="text-xl my-2 mx-0">
-                      {course.moduleName}
-                    </p>
+                    <p className="text-xl my-2 mx-0">{course.moduleName}</p>
                     <p className="my-1 mx-0">{course.time}</p>
                   </div>
                 </div>
@@ -116,19 +113,17 @@ export default function HallList({ color, status, newcourses }) {
                 }}
               >
                 <div>
+                  {/* Display hall details based on status */}
                   {status === "Planned Sessions" ? (
-                    <div className="flex flex-col pl-5"
+                    <div
+                      className="flex flex-col pl-5"
                       style={{
                         transition: "height 0.5s ease-in-out",
                       }}
                     >
-                      <p className="m-1">
-                        Conducted By: {course.lecturer}
-                      </p>
+                      <p className="m-1">Conducted By: {course.lecturer}</p>
                       <p className="m-1">Course: {course.course}</p>
-                      <p className="m-1">
-                        Groups: {course.groups}
-                      </p>
+                      <p className="m-1">Groups: {course.groups}</p>
                     </div>
                   ) : status === "Reservation" ? (
                     <div
@@ -157,7 +152,8 @@ export default function HallList({ color, status, newcourses }) {
                 </div>
 
                 {status === "Planned Sessions" ? (
-                  <Button className="w-36"
+                  <Button
+                    className="w-36"
                     style={{
                       backgroundColor:
                         hoveredItem === index ? "#D9D9D9" : "#3E737A",
@@ -165,14 +161,16 @@ export default function HallList({ color, status, newcourses }) {
                       color: "#000",
                     }}
                   >
-                      {course.type}
+                    {course.type}
                   </Button>
                 ) : status === "Reservation" ? (
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Button
                       style={{
                         backgroundColor:
@@ -192,7 +190,7 @@ export default function HallList({ color, status, newcourses }) {
                         Request Here
                       </h5>
                     </Button>
-                      <NavigationIcon sx={{ transform: "rotate(90deg)" }} />
+                    <NavigationIcon sx={{ transform: "rotate(90deg)" }} />
                   </div>
                 ) : null}
               </div>

@@ -4,36 +4,39 @@ import AnimText from "./AnimText";
 
 // Variants for the container animation, controls how it appears
 const containerVariants = {
-  hidden: { // Initial state before animation
+  hidden: {
+    // Initial state before animation
     opacity: 0,
-    y: 30
+    y: 30,
   },
-  visible: { // Initial state before animation
+  visible: {
+    // Initial state before animation
     opacity: 1,
     y: 0,
-    transition: { // Transition details for the animation
+    transition: {
+      // Transition details for the animation
       duration: 0.3,
       ease: "easeOut",
       delayChildren: 0.3, // Delay for animating child components
-      staggerChildren: 0.1 // Stagger the animation of child components
-    }
-  }
+      staggerChildren: 0.1, // Stagger the animation of child components
+    },
+  },
 };
 
 // Variants for individual item animations within the container
 const itemVariants = {
   hidden: {
     opacity: 0,
-    y: 15
+    y: 15,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.3,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 export default function A4Animation() {

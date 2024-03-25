@@ -25,11 +25,13 @@ export default function InputFileUpload() {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState("");
 
+  // Handle file change event
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
   };
 
+  // Format the data to match the server schema
   const formatData = (jsonData) => {
     const formattedData = jsonData.map((entry) => ({
       email: entry.email,
@@ -40,6 +42,7 @@ export default function InputFileUpload() {
     return formattedData;
   };
 
+  // Handle upload button click event
   const handleUpload = () => {
     if (!file) {
       setSnackbarMessage("No file selected");
@@ -49,6 +52,7 @@ export default function InputFileUpload() {
 
     const reader = new FileReader();
 
+    // Handle the file read event
     reader.onload = () => {
       try {
         const arrayBuffer = reader.result;
@@ -57,8 +61,6 @@ export default function InputFileUpload() {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-        console.log("Converted JSON data:", jsonData);
 
         const formattedData = formatData(jsonData);
 
@@ -88,12 +90,14 @@ export default function InputFileUpload() {
       }
     };
 
+    // Read the file as an array buffer
     reader.readAsArrayBuffer(file);
 
     // Reset the file state after upload if needed
     setFile(null);
   };
 
+  // Handle cancel button click event
   const handleCancel = () => {
     // Clear the selected file
     setFile(null);
@@ -101,6 +105,7 @@ export default function InputFileUpload() {
     setOpenSnackbar(true);
   };
 
+  // Handle snackbar close event
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };

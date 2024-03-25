@@ -92,8 +92,6 @@ export default function PlannedSessions({ isSidebarOpen }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  console.log("Hi", selectedDate);
-
   return (
     <>
       <section className="flex gap-0 bg-gray-200">
@@ -102,7 +100,6 @@ export default function PlannedSessions({ isSidebarOpen }) {
             display: "flex",
             justifyContent: "space-between",
             flexDirection: { xs: "column", md: "row" },
-            // paddingX: isSidebarOpen ? 10 : 15,
             paddingX: { xs: 5, md: 10 },
             paddingY: 3,
             height: "90vh",
@@ -115,7 +112,6 @@ export default function PlannedSessions({ isSidebarOpen }) {
               flexDirection: { xs: "row", md: "column" },
               justifyContent: { xs: "space-between", md: "none" },
               gap: 2,
-              // width: "100%",
             }}
           >
             <div
@@ -140,29 +136,7 @@ export default function PlannedSessions({ isSidebarOpen }) {
             </div>
           </div>
 
-          <div>
-            {/* <Time />
-            <Degree />
-            <Level /> */}
-            {/* <Group /> */}
-            {/* <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                marginTop: 1,
-                width: "100%",
-                backgroundColor: "#D9D9D9",
-                color: "#000",
-
-                ":hover": {
-                  backgroundColor: "#3E737A",
-                  color: "#fff",
-                },
-              }}
-            >
-              Search
-            </Button> */}
-          </div>
+          <div></div>
           <ReservationHallList
             color={"#3E737A"}
             isSidebarOpen={isSidebarOpen}

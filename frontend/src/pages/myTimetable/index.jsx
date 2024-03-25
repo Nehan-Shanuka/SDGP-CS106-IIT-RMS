@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import Calender from "../../components/Calender";
@@ -7,151 +8,7 @@ import { Button, Card } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 
-const timeSlotes = [
-  {
-    groupName: "CS-J",
-    course: "BSc Computer Science",
-    sessions: [
-      {
-        day: "Monday",
-        timeSessions: {
-          time_01: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Lecture",
-            subject: "Machine Learning",
-            lecturer: "Mr. Nipuna Senanayake",
-          },
-          time_02: null,
-          time_03: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Tutorial",
-            subject: "Machine Learning",
-            lecturer: "Miss Shashi Thilakarathna",
-          },
-          time_04: null,
-        },
-      },
-      {
-        day: "Tuesday",
-        timeSessions: {
-          time_01: null,
-          time_02: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Lecture",
-            subject: "Object Oriented Programming",
-            lecturer: "Mr. Nipuna Senanayake",
-          },
-          time_03: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Tutorial",
-            subject: "Object Oriented Programming",
-            lecturer: "Miss Shashi Thilakarathna",
-          },
-          time_04: null,
-        },
-      },
-      {
-        day: "Wednesday",
-        timeSessions: {
-          time_01: null,
-          time_02: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Lecture",
-            subject: "Object Oriented Programming",
-            lecturer: "Mr. Nipuna Senanayake",
-          },
-          time_03: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Tutorial",
-            subject: "Object Oriented Programming",
-            lecturer: "Miss Shashi Thilakarathna",
-          },
-          time_04: null,
-        },
-      },
-      {
-        day: "Thursday",
-        timeSessions: {
-          time_01: null,
-          time_02: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Lecture",
-            subject: "Object Oriented Programming",
-            lecturer: "Mr. Nipuna Senanayake",
-          },
-          time_03: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Tutorial",
-            subject: "Object Oriented Programming",
-            lecturer: "Miss Shashi Thilakarathna",
-          },
-          time_04: null,
-        },
-      },
-      {
-        day: "Friday",
-        timeSessions: {
-          time_01: null,
-          time_02: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Lecture",
-            subject: "Object Oriented Programming",
-            lecturer: "Mr. Nipuna Senanayake",
-          },
-          time_03: {
-            buildingID: "SP",
-            hallID: "7LA",
-            type: "Tutorial",
-            subject: "Object Oriented Programming",
-            lecturer: "Miss Shashi Thilakarathna",
-          },
-          time_04: null,
-        },
-      },
-    ],
-  },
-  {
-    hallNumber: "3LB",
-    building: "SP",
-    moduleName: "Object Oriented Programming",
-    time: "10.30-12.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Tutorial",
-  },
-  {
-    hallNumber: null,
-    building: null,
-    moduleName: "Nothing Scheduled",
-    time: "13.30-15.30",
-    lecturer: "Not Assigned",
-    course: null,
-    groups: null,
-    type: null,
-  },
-  {
-    hallNumber: "5LB",
-    building: "SP",
-    moduleName: "Object Oriented Programming",
-    time: "08.30-10.30",
-    lecturer: "Mr. A. Smith",
-    course: "BSc Computer Science (Level 5)",
-    groups: ["CS-I", "CS-J", "CS-K", "CS-L"],
-    type: "Lecture",
-  },
-];
-
-export default function MyTimetable() {
+export default function MyTimetable({ user }) {
   const [selectedDate, setSelectedDate] = useState();
   const daysOfWeek = [
     "Sunday",
@@ -165,7 +22,7 @@ export default function MyTimetable() {
   const today = new Date();
   const [day, setDay] = useState(daysOfWeek[today.getDay()]);
   const [timetables, setTimetables] = useState([]);
-  const [group, setGroup] = useState("CS-J");
+  const [group, setGroup] = useState(user.group);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -190,29 +47,25 @@ export default function MyTimetable() {
   const [item, setItem] = useState([]);
 
   useEffect(() => {
-    console.log("Timetable", timetables);
-    console.log("Day", day);
     // Update the item array whenever the day state changes
     setItem(generateItems());
-    // console.log("Item", item);
   }, [day, timetables, group]);
 
-  const filteredTimetable = timetables.filter(
-    (slot) => slot.groupName === group
-  );
+  let filteredTimetable = timetables;
+  // check if the user has a group field
+  if (user.group !== null) {
+    // setGroup(user.group);
+    filteredTimetable = timetables.filter((slot) => slot.groupName === group);
+  }
 
   const generateItems = () => {
     const item = [];
     let sessionsArray = [];
 
-    console.log("Filtered Timetable", filteredTimetable);
-
     filteredTimetable.forEach((slot) => {
       slot.sessions.forEach((session) => {
-        console.log("Day", session.day, " - ", day);
         if (session.day === day) {
           sessionsArray = [];
-          console.log("Session", sessionsArray);
           session.timeSessions["time_01"] !== null
             ? sessionsArray.push(session.timeSessions["time_01"])
             : sessionsArray.push(null);
@@ -225,20 +78,11 @@ export default function MyTimetable() {
           session.timeSessions["time_04"] !== null
             ? sessionsArray.push(session.timeSessions["time_04"])
             : sessionsArray.push(null);
-        } else {
-          // sessionsArray = [];
-          // sessionsArray.push(null);
-          // sessionsArray.push(null);
-          // sessionsArray.push(null);
-          // sessionsArray.push(null);
         }
       });
     });
 
-    console.log("Sessions", sessionsArray);
-
     for (let i = 0; i < 4; i++) {
-      // console.log("I", i);
       if (sessionsArray[i] === null || sessionsArray[i] === undefined) {
         item.push(
           <Box
@@ -345,7 +189,6 @@ export default function MyTimetable() {
         );
       }
     }
-    console.log("Item", item);
     return item;
   };
 

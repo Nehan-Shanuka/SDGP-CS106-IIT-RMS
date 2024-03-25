@@ -8,7 +8,6 @@ export default function StdGrouping() {
       const response = await axios.post(
         "https://sdgp-cs106-iit-rms.onrender.com/groups"
       );
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }

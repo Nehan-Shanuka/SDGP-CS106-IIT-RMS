@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Sample input data
 const inputData = [
     {
@@ -64,7 +65,4 @@ const inputData = [
   
   // Convert input data to the specified format
   const outputData = convertToSpecifiedFormat(inputData);
-  
-  // Display the converted data
-  console.log(outputData);
   

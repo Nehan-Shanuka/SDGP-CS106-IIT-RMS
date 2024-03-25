@@ -31,7 +31,6 @@ const NestedGrid = ({ user }) => {
         const response = await axios.get(
           "https://sdgp-cs106-iit-rms.onrender.com/timetables"
         );
-        console.log("Response data:", response.data);
         setTimetableData(response.data);
         setLoading(false);
       } catch (error) {
@@ -51,8 +50,6 @@ const NestedGrid = ({ user }) => {
   if (error) {
     return <p>Error: {error}</p>;
   }
-
-  console.log("user", user);
 
   return (
     <div className="flex flex-col">

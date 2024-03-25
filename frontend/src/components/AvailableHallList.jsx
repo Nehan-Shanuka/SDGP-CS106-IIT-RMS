@@ -19,7 +19,15 @@ const Item = styled(Paper)(({ color }) => ({
   borderRadius: 15,
 }));
 
-export default function AvailableHallList({ color, halls, buildings, dateSelected, day, isSidebarOpen, user }) {
+export default function AvailableHallList({
+  color,
+  halls,
+  buildings,
+  dateSelected,
+  day,
+  isSidebarOpen,
+  user,
+}) {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [registationForm, setRegistationForm] = useState(false);
 
@@ -27,18 +35,16 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
     setRegistationForm(changedRegistationForm);
   };
 
-  console.log(user)
-
   return (
     <Card
       sx={{
         // width: isSidebarOpen ? "55%" : "50%",
-        width: {xs: "100%", sm: "100%", md: "55%"}, // Added this line
+        width: { xs: "100%", sm: "100%", md: "55%" }, // Added this line
         backgroundColor: "#D9D9D9",
         borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: {xs: 3, sm: 3, md: 0}, // Added this line
+        marginTop: { xs: 3, sm: 3, md: 0 }, // Added this line
       }}
     >
       <CardContent>
@@ -181,7 +187,6 @@ export default function AvailableHallList({ color, halls, buildings, dateSelecte
           ) : dateSelected === null || dateSelected === undefined ? (
             (alert("Please select a date"), handleChangedRegistationForm(false))
           ) : (
-            // (console.log("Date Selected", dateSelected)),
             <div className="w-full h-full">
               <RequestForm
                 onRegistationFormChange={handleChangedRegistationForm}

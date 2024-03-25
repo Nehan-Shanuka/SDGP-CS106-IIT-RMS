@@ -29,7 +29,6 @@ router.post("/", async (request, response) => {
   const newTimetable = new Timetable(request.body);
 
   const sessions = newTimetable.sessions;
-  // console.log(sessions);
 
   for (let i = 0; i < sessions.length; i++) {
     try {
@@ -38,10 +37,8 @@ router.post("/", async (request, response) => {
 
       for (let k = 1; k <= 4; k++) {
         const time = `time_0${k}`;
-        // console.log(day, " - ", time);
 
         const timeSession = timeSessions[time];
-        // console.log(timeSession);
 
         if (timeSession.hallID === undefined || timeSession.hallID === null) {
           continue;
@@ -54,7 +51,6 @@ router.post("/", async (request, response) => {
             buildingID: building,
             hallID: timeSession.hallID,
           }).select("_id");
-          // console.log(timeSession.buildingID, hall);
 
           const newReservation = new Reservation({
             hallID: hall,
@@ -73,20 +69,10 @@ router.post("/", async (request, response) => {
             confirmation: true,
           });
 
-          // console.log(day, i, newReservation);
-          // console.log("Previous", newTimetable);
-
           const savedReservation = await Reservation.create(newReservation);
           const reservationID = savedReservation._id;
-          // console.log("Saved Reservation ", savedReservation);
-          // console.log("Saved Reservation ID ", savedReservation.day, " - ", savedReservation.time);
-
-          // console.log(i)
-          newTimetable.sessions[i].timeSessions[time].reservationID = reservationID;
-
-          // console.log("New Timetable ",day , time, newTimetable.sessions[i].timeSessions[time]);
-
-          // console.log("New Timetable ",day , time, newTimetable.sessions[i].timeSessions[time]);
+          newTimetable.sessions[i].timeSessions[time].reservationID =
+            reservationID;
 
           const reservationHall = await Hall.findById(hall);
 
@@ -96,7 +82,8 @@ router.post("/", async (request, response) => {
 
           if (exsistingDayIndex !== -1) {
             const updatedHallTimetable = [...reservationHall.timetableSessions];
-            updatedHallTimetable[exsistingDayIndex].reservations[time] = reservationID;
+            updatedHallTimetable[exsistingDayIndex].reservations[time] =
+              reservationID;
 
             const updatedHall = await Hall.findByIdAndUpdate(
               hall,

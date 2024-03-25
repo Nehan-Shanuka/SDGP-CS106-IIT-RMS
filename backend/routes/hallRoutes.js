@@ -26,8 +26,8 @@ router.post("/:buildingId", async (request, response) => {
 // Get all halls
 router.get("/", async (request, response) => {
   try {
-
-    let buildingShortName = request.query.buildingID === undefined ? [] : request.query.buildingID;
+    let buildingShortName =
+      request.query.buildingID === undefined ? [] : request.query.buildingID;
 
     if (buildingShortName.length === 0) {
       buildingShortName = "All";
@@ -35,7 +35,9 @@ router.get("/", async (request, response) => {
       buildingShortName = request.query.buildingID.split(",");
     }
 
-    const buildingIDs = await Building.find({ buildingID: { $in: [...buildingShortName] } }).select("_id");
+    const buildingIDs = await Building.find({
+      buildingID: { $in: [...buildingShortName] },
+    }).select("_id");
 
     const halls = await Hall.find(
       buildingShortName === "All"

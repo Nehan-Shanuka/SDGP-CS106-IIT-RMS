@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
+import { useEffect, useState } from "react";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -22,10 +22,7 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Lecture',
-  'Tutorial',
-];
+const names = ["Lecture", "Tutorial"];
 
 export default function MultipleSelectCheckmarks({ onTypeChange }) {
   const [typeName, setTypeName] = useState([]);
@@ -36,7 +33,7 @@ export default function MultipleSelectCheckmarks({ onTypeChange }) {
     } = event;
     setTypeName(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === "string" ? value.split(",") : value
     );
   };
 
@@ -46,7 +43,7 @@ export default function MultipleSelectCheckmarks({ onTypeChange }) {
 
   return (
     <div>
-      <FormControl sx={{ marginTop: 1, width: '100%' }}>
+      <FormControl sx={{ marginTop: 1, width: "100%" }}>
         <InputLabel id="demo-multiple-checkbox-label">Select Type</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"

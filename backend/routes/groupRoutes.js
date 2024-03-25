@@ -17,10 +17,7 @@ router.get("/", async (request, response) => {
 
 // Create a new group
 router.post("/", async (request, response) => {
-
   const students = await Student.find();
-  console.log(students);
-  console.log(students.length);
   const studentGrouping = new StudentGrouping(students);
 
   const newGroup = new Group(studentGrouping);

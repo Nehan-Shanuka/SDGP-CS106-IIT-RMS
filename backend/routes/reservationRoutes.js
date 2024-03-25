@@ -209,14 +209,12 @@ router.delete("/:id", async (request, response) => {
   try {
     // Get the reservation according to the id
     const reservation = await Reservation.findByIdAndDelete(request.params.id);
-    console.log(reservation);
 
     if (reservation.confirmation && reservation.date !== undefined) {
       // Get the hallID that the reservation is made for
       const hallId = reservation.hallID;
       // Get the hall according to the hallID
       const hall = await Hall.findById(hallId);
-      console.log(hall);
 
       // Find the index of the planned session's date that the reservation is made for
       const exsistingPlannedSessionIndex = hall.plannedSessions.findIndex(
@@ -269,7 +267,6 @@ router.delete("/:id", async (request, response) => {
       const hallId = reservation.hallID;
       // Get the hall according to the hallID
       const hall = await Hall.findById(hallId);
-      console.log(hall);
 
       // Find the index of the planned session's date that the reservation is made for
       const exsistingTimetableSessionIndex = hall.timetableSessions.findIndex(

@@ -1,21 +1,18 @@
-import React from "react";
-import { useTypewriter, Cursor } from "react-simple-typewriter";
+/* eslint-disable react/prop-types */
+import { useTypewriter } from "react-simple-typewriter";
 
-export default function SimpleTypewriter({ words ,text}) {
+export default function SimpleTypewriter({ words, text }) {
   const [typeEffect] = useTypewriter({
     words: words,
     loop: {},
-    typeSpeed: 80,
-    deleteSpeed:40
+    typeSpeed: 100,
+    deleteSpeed: 50,
   });
 
   return (
-    <h1 style={{ margin: "50px", fontSize:"30px"}}>
-      {text}  
+    <h1 style={{ margin: "1rem 2rem 2rem", fontSize: "30px" }}>
+      {text}
       <span style={{ fontWeight: "bold", color: "green" }}>{typeEffect}</span>
-      <span style={{ color: "red" }}>
-        <Cursor />
-      </span>
     </h1>
   );
 }
