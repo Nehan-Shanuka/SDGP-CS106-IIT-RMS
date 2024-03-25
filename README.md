@@ -4,12 +4,13 @@
 The IIT RMS is a Resource Management System for the Informatics Institute of Technology (IIT Sri Lanka).
 
 ### Zip file - Open Steps
-in new terminal,
-    1. cd backend
-    2. npm run dev
-in new terminal,
-    1. cd frontend
-    2. npm run dev
+**in new terminal,**
+1. cd backend
+2. npm run dev
+3. 
+**in new terminal,**
+1. cd frontend
+2. npm run dev
     
 ### Facilitates the IIT RMS is proposed to provide
 
